@@ -22,36 +22,20 @@ export class ThemeService {
     this.themes.set([
       {
         id: 'modern',
-        nom: 'Modern Pro',
+        nom: 'Horizon moderne',
         description: 'Design moderne et épuré',
-        preview: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg',
+        preview: '../../../assets/images/temp1.png',
         active: true,
         premium: false
       },
       {
         id: 'creative',
-        nom: 'Creative Studio',
+        nom: 'Barre latérale créative',
         description: 'Pour les créatifs et designers',
-        preview: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg',
+        preview: '../../../assets/images/temp2.png',
         active: false,
         premium: true
       },
-      {
-        id: 'minimal',
-        nom: 'Minimal Clean',
-        description: 'Simplicité et élégance',
-        preview: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg',
-        active: false,
-        premium: true
-      },
-      {
-        id: 'corporate',
-        nom: 'Corporate',
-        description: 'Professionnel et corporate',
-        preview: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg',
-        active: false,
-        premium: false
-      }
     ]);
   }
 

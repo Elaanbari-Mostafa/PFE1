@@ -18,9 +18,12 @@ export class SubscriptionService {
         prix: 0,
         dureeEnJours: 3,
         avantages: [
-          { id: '1', texte: 'Accès à toutes les fonctionnalités', planAbonnementId: 'gratuit' },
-          { id: '2', texte: 'Tous les templates', planAbonnementId: 'gratuit' },
-          { id: '3', texte: 'Support prioritaire', planAbonnementId: 'gratuit' }
+          { id: '1', texte: 'Accès à toutes les fonctionnalités de la plateforme', planAbonnementId: 'gratuit' },
+          { id: '2', texte: 'Tous les templates disponibles', planAbonnementId: 'gratuit' },
+          { id: '3', texte: 'Création d\'un portfolio professionnel', planAbonnementId: 'gratuit' },
+          { id: '4', texte: 'Mises à jour automatiques', planAbonnementId: 'gratuit' },
+          { id: '5', texte: 'SSL inclus', planAbonnementId: 'gratuit' },
+          { id: '6', texte: 'Aucune limitation pendant 3 jours', planAbonnementId: 'gratuit' },
         ]
       },
       {
@@ -29,9 +32,14 @@ export class SubscriptionService {
         prix: 19.99,
         dureeEnJours: 30,
         avantages: [
-          { id: '4', texte: 'Portfolio professionnel', planAbonnementId: 'mensuel' },
-          { id: '5', texte: 'Domaine personnalisé', planAbonnementId: 'mensuel' },
-          { id: '6', texte: 'Analytics avancés', planAbonnementId: 'mensuel' }
+          { id: '1', texte: 'Accès à toutes les fonctionnalités de la plateforme', planAbonnementId: 'mensuel' },
+          { id: '2', texte: 'Un portfolio professionnel', planAbonnementId: 'mensuel' },
+          { id: '3', texte: 'Support prioritaire 24/7', planAbonnementId: 'mensuel' },
+          { id: '4', texte: 'Tous les templates disponibles', planAbonnementId: 'mensuel' },
+          
+          
+          { id: '7', texte: 'SSL inclus', planAbonnementId: 'mensuel' },
+          { id: '8', texte: 'Mises à jour automatiques', planAbonnementId: 'mensuel' },
         ]
       },
       {
@@ -40,9 +48,14 @@ export class SubscriptionService {
         prix: 199.99,
         dureeEnJours: 365,
         avantages: [
-          { id: '7', texte: 'Tout du plan mensuel', planAbonnementId: 'annuel' },
+          { id: '1', texte: 'Accès à toutes les fonctionnalités de la plateforme', planAbonnementId: 'annuel' },
+          { id: '2', texte: 'Un portfolio professionnel', planAbonnementId: 'annuel' },
+          { id: '4', texte: 'Tous les templates disponibles', planAbonnementId: 'annuel' },
+          { id: '3', texte: 'Support prioritaire 24/7', planAbonnementId: 'annuel' },
+          { id: '8', texte: 'Mises à jour automatiques', planAbonnementId: 'annuel' },
+          { id: '7', texte: 'SSL inclus', planAbonnementId: 'annuel' },
+          
           { id: '8', texte: '2 mois gratuits', planAbonnementId: 'annuel' },
-          { id: '9', texte: 'Support 24/7', planAbonnementId: 'annuel' }
         ]
       }
     ]);

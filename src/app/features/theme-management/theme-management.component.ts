@@ -7,13 +7,15 @@ import { DialogModule } from 'primeng/dialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { InputTextModule } from 'primeng/inputtext';
 import { ThemeService, Theme } from '../../core/services/theme.service';
+import { Router }  from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-theme-management',
   standalone: true,
   imports: [
     CommonModule, ButtonModule, CardModule, DialogModule,
-    ColorPickerModule, InputTextModule
+    ColorPickerModule, InputTextModule, //,FormsModule
   ],
   templateUrl: './theme-management.component.html',
   styleUrls: ['./theme-management.component.scss']
@@ -31,11 +33,16 @@ export class ThemeManagementComponent implements OnInit {
 
   constructor(
     private themeService: ThemeService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.loadThemes();
+  }
+
+  goBack() {
+    this.router.navigate(['/dashboard']);
   }
 
   loadThemes() {

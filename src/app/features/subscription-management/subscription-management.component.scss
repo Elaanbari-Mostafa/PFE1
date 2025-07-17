@@ -5,7 +5,8 @@
 }
 
 .subscription-header {
-    text-align: center;
+    // text-align: center;
+     display: flex;
     margin-bottom: 3rem;
 }
 
@@ -79,10 +80,85 @@
     border: 2px solid var(--primary-color);
 }
 
+.subscription-history {
+  margin-top: 3rem;
+}
+
+.subscription-history h2 {
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.subscription-history {
+  margin-top: 3rem;
+  
+  h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  .p-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: none;
+    overflow: hidden;
+  }
+}
+
+::ng-deep{
+    .p-card {
+            height: 100%;
+    }
+}
+
+
+.periode-info {
+  font-size: 0.9rem;
+}
+
+.periode-info div:first-child {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.periode-info div:last-child {
+  color: var(--text-color-secondary);
+  margin-top: 0.25rem;
+}
+
+.montant {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.montant.gratuit {
+  color: var(--success-color);
+}
+
+.methode-paiement {
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+}
+
+.empty-history {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-color-secondary);
+}
+
+.empty-history p {
+  margin: 0;
+  font-size: 1rem;
+}
+
 ::ng-deep {
     .plans-grid {
         .p-card {
-            padding: 10px;
+            padding: 15px;
         }
     }
 }
+
+
