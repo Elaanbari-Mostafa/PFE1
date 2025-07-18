@@ -29,7 +29,7 @@ export class SubscriptionService {
       {
         id: 'mensuel',
         nom: 'Plan Mensuel',
-        prix: 19.99,
+        prix: 69,
         dureeEnJours: 30,
         avantages: [
           { id: '1', texte: 'Accès à toutes les fonctionnalités de la plateforme', planAbonnementId: 'mensuel' },
@@ -45,7 +45,7 @@ export class SubscriptionService {
       {
         id: 'annuel',
         nom: 'Plan Annuel',
-        prix: 199.99,
+        prix: 690,
         dureeEnJours: 365,
         avantages: [
           { id: '1', texte: 'Accès à toutes les fonctionnalités de la plateforme', planAbonnementId: 'annuel' },

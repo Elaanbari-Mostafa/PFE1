@@ -27,11 +27,11 @@ interface HistoriqueAbonnement {
   selector: 'app-subscription-management',
   standalone: true,
   imports: [
-    CommonModule, 
-    ButtonModule, 
-    CardModule, 
-    TableModule, 
-    TagModule, 
+    CommonModule,
+    ButtonModule,
+    CardModule,
+    TableModule,
+    TagModule,
     ConfirmDialogModule,
     InputTextModule
   ],
@@ -62,7 +62,7 @@ export class SubscriptionManagementComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadData();
@@ -70,7 +70,7 @@ export class SubscriptionManagementComponent implements OnInit {
 
   private loadData() {
     this.loading = true;
-    
+
     Promise.all([
       this.loadPlans(),
       this.loadCurrentSubscription(),
@@ -118,12 +118,21 @@ export class SubscriptionManagementComponent implements OnInit {
       // Simulation de données d'historique avec plus de variété
       this.historiqueAbonnements = [
         {
+          id: '3',
+          planNom: 'Plan Annuel',
+          dateDebut: new Date('2024-02-01'),
+          dateFin: new Date('2025-02-01'),
+          statut: 'actif',
+          montant: 690,
+          methodePaiement: 'Carte bancaire'
+        },
+        {
           id: '1',
           planNom: 'Plan Mensuel',
           dateDebut: new Date('2024-01-01'),
           dateFin: new Date('2024-02-01'),
           statut: 'expire',
-          montant: 19.99,
+          montant: 69,
           methodePaiement: 'PayPal'
         },
         {
@@ -136,30 +145,12 @@ export class SubscriptionManagementComponent implements OnInit {
           methodePaiement: 'Gratuit'
         },
         {
-          id: '3',
-          planNom: 'Plan Annuel',
-          dateDebut: new Date('2024-02-01'),
-          dateFin: new Date('2025-02-01'),
-          statut: 'actif',
-          montant: 199.99,
-          methodePaiement: 'Carte bancaire'
-        },
-        {
-          id: '4',
-          planNom: 'Plan Trimestriel',
-          dateDebut: new Date('2023-09-01'),
-          dateFin: new Date('2023-12-01'),
-          statut: 'expire',
-          montant: 49.99,
-          methodePaiement: 'Carte bancaire'
-        },
-        {
           id: '5',
-          planNom: 'Plan Premium',
+          planNom: 'Plan Mensuel',
           dateDebut: new Date('2023-06-01'),
           dateFin: new Date('2023-09-01'),
-          statut: 'annule',
-          montant: 29.99,
+          statut: 'expire',
+          montant: 69,
           methodePaiement: 'PayPal'
         }
       ];
@@ -213,7 +204,7 @@ export class SubscriptionManagementComponent implements OnInit {
 
     const isUpgrade = this.isUpgrade(plan);
     const action = isUpgrade ? 'mise à niveau' : 'changement';
-    
+
     this.confirmationService.confirm({
       message: `Voulez-vous effectuer un ${action} vers le plan "${plan.nom}" ?`,
       header: `${isUpgrade ? 'Mise à niveau' : 'Changement'} de plan`,
@@ -252,10 +243,10 @@ export class SubscriptionManagementComponent implements OnInit {
 
   private isUpgrade(newPlan: PlanAbonnement): boolean {
     if (!this.currentSubscription) return true;
-    
+
     const currentPlan = this.plans.find(p => p.id === this.currentSubscription?.planAbonnementId);
     if (!currentPlan) return true;
-    
+
     return newPlan.prix > currentPlan.prix;
   }
 
@@ -314,7 +305,7 @@ export class SubscriptionManagementComponent implements OnInit {
   // Méthodes utilitaires pour l'affichage
   getSubscriptionStatusClass(): string {
     if (!this.currentSubscription) return '';
-    
+
     const daysLeft = this.getDaysLeft();
     if (daysLeft < 7) return 'text-danger';
     if (daysLeft < 30) return 'text-warning';
@@ -323,7 +314,7 @@ export class SubscriptionManagementComponent implements OnInit {
 
   getSubscriptionStatusIcon(): string {
     if (!this.currentSubscription) return 'pi-info-circle';
-    
+
     switch (this.currentSubscription.statut) {
       case 'actif': return 'pi-check-circle';
       case 'expire': return 'pi-times-circle';
@@ -407,7 +398,7 @@ export class SubscriptionManagementComponent implements OnInit {
     return this.historiqueAbonnements.filter(h => h.statut === 'actif').length;
   }
 
-    goBack() {
+  goBack() {
     this.router.navigate(['/dashboard']);
   }
 

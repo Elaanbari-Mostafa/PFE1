@@ -36,9 +36,13 @@
           </div>
           <div class="info-item">
             <label>Jours restants:</label>
-           <span [ngClass]="{'text-danger': getDaysLeft() < 7, 'text-warning': getDaysLeft() < 30}">
+            <span
+              [ngClass]="{
+                'text-danger': getDaysLeft() < 7,
+                'text-warning': getDaysLeft() < 30
+              }"
+            >
               {{ getDaysLeft() }} jours
-            
             </span>
           </div>
         </div>
@@ -50,13 +54,13 @@
             class="p-button-outlined"
             (click)="showPlans = true"
           ></button>
-          <button
+          <!-- <button
             pButton
             label="Annuler"
             icon="pi pi-times"
             class="p-button-danger p-button-outlined"
             (click)="cancelSubscription()"
-          ></button>
+          ></button> -->
         </div>
       </p-card>
     </div>
@@ -65,15 +69,20 @@
     <div class="available-plans" *ngIf="showPlans">
       <h2>Plans Disponibles</h2>
       <div class="plans-grid">
-        <p-card 
+        <p-card
           *ngFor="let plan of plans"
           [ngClass]="{ 'current-plan': isCurrentPlan(plan) }"
         >
           <ng-template pTemplate="header">
-            <h3 style="text-align: center;">{{ plan.nom }}</h3>
-            <div class="plan-price">
-              <span class="price">{{ plan.prix }}€</span>
+            <h3 style="text-align: center">{{ plan.nom }}</h3>
+            <!-- <div class="plan-price">
+              <span class="price">{{ plan.prix }}MAD</span>
               <span class="period">/ {{ plan.dureeEnJours }} jours</span>
+            </div> -->
+            <div class="price">
+              <span class="currency">MAD</span>
+              <span class="amount">{{ plan.prix }}</span>
+              <span class="period">/ {{ plan.dureeEnJours }}</span>
             </div>
           </ng-template>
 
@@ -95,80 +104,91 @@
           </ng-template>
         </p-card>
       </div>
+      <div class="text-center" style="margin-top: 2rem">
+        <button
+          pButton
+          label="Masquer les plans"
+          icon="pi pi-eye-slash"
+          class="p-button-text p-button-secondary"
+          (click)="showPlans = false"
+        ></button>
+      </div>
     </div>
     <!-- Historique des Abonnements -->
-<div class="subscription-history">
-  <h2>Historique des Abonnements</h2>
-  <p-card>
-    <p-table
-      [value]="historiqueAbonnements"
-      styleClass="p-datatable-striped"
-      [paginator]="true"
-      [rows]="5"
-      [showCurrentPageReport]="true"
-      currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} abonnements"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Plan</th>
-          <th>Période</th>
-          <th>Statut</th>
-          <th>Montant</th>
-          <!-- <th>Méthode de paiement</th> -->
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-abonnement>
-        <tr>
-          <td>
-            <strong>{{ abonnement.planNom }}</strong>
-          </td>
-          <td>
-            <div class="periode-info">
-              <div>Du {{ abonnement.dateDebut | date : "dd/MM/yyyy" }}</div>
-              <div>Au {{ abonnement.dateFin | date : "dd/MM/yyyy" }}</div>
-            </div>
-          </td>
-          <td>
-            <p-tag
-              [value]="getHistoriqueStatusLabel(abonnement.statut)"
-              [severity]="getStatusSeverity(abonnement.statut)"
-            ></p-tag>
-          </td>
-          <td>
-            <span
-              class="montant"
-              [ngClass]="{ gratuit: abonnement.montant === 0 }"
-            >
-              {{
-                abonnement.montant === 0 ? "Gratuit" : abonnement.montant + " €"
-              }}
-            </span>
-          </td>
-          <!-- <td>
+    <div class="subscription-history">
+      <h2>Historique des Abonnements</h2>
+      <p-card>
+        <p-table
+          [value]="historiqueAbonnements"
+          styleClass="p-datatable-striped"
+          [paginator]="true"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} abonnements"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Plan</th>
+              <th>Période</th>
+              <th>Statut</th>
+              <th>Montant</th>
+              <!-- <th>Méthode de paiement</th> -->
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-abonnement>
+            <tr>
+              <td>
+                <strong>{{ abonnement.planNom }}</strong>
+              </td>
+              <td>
+                <div class="periode-info">
+                  <div>Du {{ abonnement.dateDebut | date : "dd/MM/yyyy" }}</div>
+                  <div>Au {{ abonnement.dateFin | date : "dd/MM/yyyy" }}</div>
+                </div>
+              </td>
+              <td>
+                <p-tag
+                  [value]="getHistoriqueStatusLabel(abonnement.statut)"
+                  [severity]="getStatusSeverity(abonnement.statut)"
+                ></p-tag>
+              </td>
+              <td>
+                <span
+                  class="montant"
+                  [ngClass]="{ gratuit: abonnement.montant === 0 }"
+                >
+                  {{
+                    abonnement.montant === 0
+                      ? "Gratuit"
+                      : abonnement.montant + " MAD"
+                  }}
+                </span>
+              </td>
+              <!-- <td>
             <span class="methode-paiement">{{
               abonnement.methodePaiement
             }}</span>
           </td> -->
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="empty">
-        <tr>
-          <td colspan="5" class="text-center">
-            <div class="empty-history">
-              <i
-                class="pi pi-history"
-                style="font-size: 2rem; color: #ccc; margin-bottom: 1rem"
-              ></i>
-              <p>Aucun historique d'abonnement disponible</p>
-            </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </p-card>
-</div>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="empty">
+            <tr>
+              <td colspan="5" class="text-center">
+                <div class="empty-history">
+                  <i
+                    class="pi pi-history"
+                    style="font-size: 2rem; color: #ccc; margin-bottom: 1rem"
+                  ></i>
+                  <p>Aucun historique d'abonnement disponible</p>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+    </div>
   </div>
-   <!-- <div class="text-center" style="margin-top: 2rem;">
+  <!-- <div class="text-center" style="margin-top: 2rem;">
         <button pButton
                 label="Masquer les plans"
                 icon="pi pi-eye-slash"
@@ -176,8 +196,6 @@
                 (click)="showPlans = false">
         </button>
       </div> -->
-      
 </div>
-
 
 <p-confirmDialog></p-confirmDialog>
