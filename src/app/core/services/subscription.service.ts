@@ -17,6 +17,7 @@ export class SubscriptionService {
         nom: 'Essai Gratuit',
         prix: 0,
         dureeEnJours: 3,
+        popular: true,
         avantages: [
           { id: '1', texte: 'Accès à toutes les fonctionnalités de la plateforme', planAbonnementId: 'gratuit' },
           { id: '2', texte: 'Tous les templates disponibles', planAbonnementId: 'gratuit' },
@@ -31,6 +32,7 @@ export class SubscriptionService {
         nom: 'Plan Mensuel',
         prix: 69,
         dureeEnJours: 30,
+        popular: false,
         avantages: [
           { id: '1', texte: 'Accès à toutes les fonctionnalités de la plateforme', planAbonnementId: 'mensuel' },
           { id: '2', texte: 'Un portfolio professionnel', planAbonnementId: 'mensuel' },
@@ -47,6 +49,7 @@ export class SubscriptionService {
         nom: 'Plan Annuel',
         prix: 690,
         dureeEnJours: 365,
+        popular: false,
         avantages: [
           { id: '1', texte: 'Accès à toutes les fonctionnalités de la plateforme', planAbonnementId: 'annuel' },
           { id: '2', texte: 'Un portfolio professionnel', planAbonnementId: 'annuel' },

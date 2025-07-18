@@ -4,11 +4,11 @@
     <p>Gérez vos types de compétences et de projets personnalisés</p>
   </div>
   
-  <p-tabView [(activeIndex)]="activeTab === 'competences' ? 0 : 1" 
-             (onChange)="activeTab = $event.index === 0 ? 'competences' : 'projets'">
-    
+  <!-- <p-tabView [(activeIndex)]="activeTab === 'competences' ? 0 : 1" 
+             (onChange)="activeTab = $event.index === 0 ? 'competences' : 'projets'"> -->
+    <p-tabView [(activeIndex)]="activeTab" (onChange)="activeTab = $event.index">
     <!-- Onglet Types de Compétences -->
-    <p-tabPanel header="Types de Compétences" leftIcon="pi pi-star">
+    <p-tabPanel header="Types de Compétences" leftIcon="pi pi-star" [selected]="activeTab === 0"> 
       <div class="tab-content">
         <div class="tab-header">
           <h3>Types de Compétences</h3>
@@ -45,7 +45,7 @@
     </p-tabPanel>
     
     <!-- Onglet Types de Projets -->
-    <p-tabPanel header="Types de Projets" leftIcon="pi pi-briefcase">
+    <p-tabPanel header="Types de Projets" leftIcon="pi pi-briefcase" [selected]="activeTab === 1">
       <div class="tab-content">
         <div class="tab-header">
           <h3>Types de Projets</h3>

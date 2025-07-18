@@ -28,8 +28,8 @@ import { TypeCompetence, TypeProjet } from '../../../../core/models/portfolio.mo
 export class TypesManagementComponent implements OnInit {
   typesCompetences: TypeCompetence[] = [];
   typesProjets: TypeProjet[] = [];
-  activeTab = 'competences';
-  
+  // activeTab = 'competences';
+  activeTab: number = 0;
   competenceTypeForm: FormGroup;
   projetTypeForm: FormGroup;
   

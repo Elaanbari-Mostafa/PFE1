@@ -141,6 +141,12 @@ import { Portfolio } from '../../core/models/portfolio.model';
       margin-bottom: 2rem;
       min-height: 500px;
     }
+
+    ::ng-deep {
+      .p-tabmenu-nav  {
+        width: fit-content !important;
+      }
+    }
     
     @media (max-width: 768px) {
       .builder-actions-top {

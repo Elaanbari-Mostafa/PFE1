@@ -1,4 +1,4 @@
-<div class="section-header">
+<div class="section-header text-left">
   <h2>Informations Personnelles</h2>
   <p>Complétez vos informations personnelles pour votre portfolio</p>
 </div>
@@ -11,130 +11,142 @@
       <input pInputText id="nom" formControlName="nom" placeholder="Votre nom" />
       <small *ngIf="nom?.invalid && nom?.touched" class="p-error">Le nom est requis</small>
     </div>
-    
+
     <div class="form-group">
       <label for="prenom">Prénom *</label>
       <input pInputText id="prenom" formControlName="prenom" placeholder="Votre prénom" />
       <small *ngIf="prenom?.invalid && prenom?.touched" class="p-error">Le prénom est requis</small>
     </div>
-    
+
     <div class="form-group">
       <label for="email">Email *</label>
       <input pInputText id="email" formControlName="email" placeholder="votre@email.com" />
       <small *ngIf="email?.invalid && email?.touched" class="p-error">Email valide requis</small>
     </div>
-    
+
     <div class="form-group">
       <label for="telephone">Téléphone</label>
-      <input pInputText id="telephone" formControlName="telephone" placeholder="+33 6 12 34 56 78" />
+      <input pInputText id="telephone" formControlName="telephone" placeholder="Ex : 06 00 00 00 00" />
     </div>
-    
+
     <div class="form-group">
       <label for="nomUtilisateur">Nom d'utilisateur *</label>
       <input pInputText id="nomUtilisateur" formControlName="nomUtilisateur" placeholder="nomutilisateur" />
-      <small *ngIf="nomUtilisateur?.invalid && nomUtilisateur?.touched" class="p-error">Le nom d'utilisateur est requis</small>
+      <small *ngIf="nomUtilisateur?.invalid && nomUtilisateur?.touched" class="p-error">Le nom d'utilisateur est
+        requis</small>
     </div>
-    
+
     <div class="form-group">
       <label for="titrePro">Titre professionnel *</label>
       <input pInputText id="titrePro" formControlName="titrePro" placeholder="Ex: Développeur Full Stack" />
       <small *ngIf="titrePro?.invalid && titrePro?.touched" class="p-error">Le titre professionnel est requis</small>
     </div>
-    
-    <div class="form-group full-width">
-      <label for="descPro">Mots-clés professionnels</label>
-      <textarea pInputTextarea id="descPro" formControlName="descPro" 
-               placeholder="Mots-clés liés à votre activité..." rows="2"></textarea>
-    </div>
-    
-    <!-- Localisation -->
-    <div class="form-group">
-      <label for="nationalite">Nationalité</label>
-      <input pInputText id="nationalite" formControlName="nationalite" placeholder="Française" />
-    </div>
-    
-    <div class="form-group">
-      <label for="pays">Pays *</label>
-      <input pInputText id="pays" formControlName="pays" placeholder="France" />
-      <small *ngIf="pays?.invalid && pays?.touched" class="p-error">Le pays est requis</small>
-    </div>
-    
-    <div class="form-group">
-      <label for="ville">Ville *</label>
-      <input pInputText id="ville" formControlName="ville" placeholder="Paris" />
-      <small *ngIf="ville?.invalid && ville?.touched" class="p-error">La ville est requise</small>
-    </div>
-    
-    <div class="form-group">
-      <label for="dateNaissance">Date de naissance</label>
-      <p-calendar id="dateNaissance" formControlName="dateNaissance" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
-    </div>
-    
-    <!-- Langues -->
-    <div class="form-group full-width">
-      <label for="languages">Langues parlées</label>
-      <p-chips id="languages" formControlName="languages" 
-               placeholder="Appuyez sur Entrée pour ajouter une langue"></p-chips>
-    </div>
-    
-    <!-- Photos -->
-    <div class="form-group">
-      <label>Photo de profil principale</label>
-      <p-fileUpload mode="basic" name="photoOriginal" accept="image/*" 
-                   [maxFileSize]="1000000" chooseLabel="Choisir une photo"
-                   (onSelect)="onPhotoSelect($event, 'original')"></p-fileUpload>
-      <small class="p-help">Format accepté: JPG, PNG (max 1MB)</small>
-    </div>
-    
-    <div class="form-group">
-      <label>Photo de profil secondaire</label>
-      <p-fileUpload mode="basic" name="photoSecondaire" accept="image/*" 
-                   [maxFileSize]="1000000" chooseLabel="Choisir une photo"
-                   (onSelect)="onPhotoSelect($event, 'secondaire')"></p-fileUpload>
-      <small class="p-help">Format accepté: JPG, PNG (max 1MB)</small>
-    </div>
-    
-    <!-- Statistiques -->
-    <div class="form-group">
-      <label for="projetsTermines">Projets terminés</label>
-      <p-inputNumber id="projetsTermines" formControlName="projetsTermines" 
-                    [min]="0" [showButtons]="true"></p-inputNumber>
-    </div>
-    
-    <div class="form-group">
-      <label for="recompenses">Récompenses</label>
-      <p-inputNumber id="recompenses" formControlName="recompenses" 
-                    [min]="0" [showButtons]="true"></p-inputNumber>
-    </div>
-    
-    <div class="form-group">
-      <label for="clientsSatisfaits">Clients satisfaits</label>
-      <p-inputNumber id="clientsSatisfaits" formControlName="clientsSatisfaits" 
-                    [min]="0" [showButtons]="true"></p-inputNumber>
-    </div>
-    
-    <div class="form-group">
-      <label for="anneesExperience">Années d'expérience</label>
-      <p-inputNumber id="anneesExperience" formControlName="anneesExperience" 
-                    [min]="0" [showButtons]="true"></p-inputNumber>
-    </div>
-    
+
     <!-- Description -->
     <div class="form-group full-width">
       <label for="description">Description professionnelle</label>
-      <textarea pInputTextarea id="description" formControlName="description" 
-               placeholder="Décrivez-vous en quelques mots..." rows="4"></textarea>
+      <textarea pInputTextarea id="description" formControlName="description"
+        placeholder="Décrivez-vous en quelques mots..." rows="3"></textarea>
     </div>
-    
+
+    <div class="form-group full-width">
+      <label for="surMoi">Sur moi</label>
+      <textarea pInputTextarea id="surMoi" formControlName="surMoi" placeholder="Décrivez-vous" rows="5"></textarea>
+    </div>
+
     <div class="form-group full-width">
       <label for="adresse">Adresse complète *</label>
       <input pInputText id="adresse" formControlName="adresse" placeholder="Votre adresse complète" />
       <small *ngIf="adresse?.invalid && adresse?.touched" class="p-error">L'adresse est requise</small>
     </div>
+
+    <!-- Localisation -->
+    <div class="form-group">
+      <label for="nationalite">Nationalité</label>
+      <input pInputText id="nationalite" formControlName="nationalite" placeholder="" />
+    </div>
+
+    <div class="form-group">
+      <label for="pays">Pays *</label>
+      <input pInputText id="pays" formControlName="pays" placeholder="" />
+      <small *ngIf="pays?.invalid && pays?.touched" class="p-error">Le pays est requis</small>
+    </div>
+
+    <div class="form-group">
+      <label for="ville">Ville *</label>
+      <input pInputText id="ville" formControlName="ville" placeholder="" />
+      <small *ngIf="ville?.invalid && ville?.touched" class="p-error">La ville est requise</small>
+    </div>
+
+    <div class="form-group">
+      <label for="dateNaissance">Date de naissance</label>
+      <p-calendar id="dateNaissance" formControlName="dateNaissance" [showIcon]="true"
+        dateFormat="dd/mm/yy"></p-calendar>
+    </div>
+
+    <!-- Langues -->
+    <div class="form-group ">
+      <label for="languages">Langues parlées</label>
+      <p-chips id="languages" formControlName="languages"
+        placeholder="Appuyez sur Entrée pour ajouter une langue"></p-chips>
+    </div>
+
+    <div class="form-group ">
+    </div>
+
+
+    <!-- Statistiques -->
+    <div class="form-group">
+      <label for="projetsTermines">Projets terminés</label>
+      <p-inputNumber id="projetsTermines" formControlName="projetsTermines" [min]="0"
+        [showButtons]="true"></p-inputNumber>
+    </div>
+
+    <div class="form-group">
+      <label for="recompenses">Récompenses</label>
+      <p-inputNumber id="recompenses" formControlName="recompenses" [min]="0" [showButtons]="true"></p-inputNumber>
+    </div>
+
+    <div class="form-group">
+      <label for="clientsSatisfaits">Clients satisfaits</label>
+      <p-inputNumber id="clientsSatisfaits" formControlName="clientsSatisfaits" [min]="0"
+        [showButtons]="true"></p-inputNumber>
+    </div>
+
+    <div class="form-group">
+      <label for="anneesExperience">Années d'expérience</label>
+      <p-inputNumber id="anneesExperience" formControlName="anneesExperience" [min]="0"
+        [showButtons]="true"></p-inputNumber>
+    </div>
+
+    <!-- Photos -->
+    <div class="form-group">
+      <label>Photo de profil principale</label>
+      <p-fileUpload mode="basic" name="photoOriginal" accept="image/*" [maxFileSize]="10000000"
+        chooseLabel="Choisir une photo" (onSelect)="onPhotoSelect($event, 'original')"></p-fileUpload>
+      <small class="p-help">Format accepté: JPG, PNG </small>
+    </div>
+
+    <div class="form-group">
+      <label>Photo de profil secondaire</label>
+      <p-fileUpload mode="basic" name="photoSecondaire" accept="image/*" [maxFileSize]="10000000"
+        chooseLabel="Choisir une photo" (onSelect)="onPhotoSelect($event, 'secondaire')"></p-fileUpload>
+      <small class="p-help">Format accepté: JPG, PNG </small>
+    </div>
+
+    <div class="form-group">
+      <label>CV</label>
+      <p-fileUpload mode="basic" name="CV" accept="application/pdf" [maxFileSize]="10000000"
+        chooseLabel="Choisir votre cv" (onSelect)="onCVSelect($event)"></p-fileUpload>
+      <small class="p-help">Format accepté: PDF </small>
+    </div>
+
+
   </div>
-  
+
   <div class="form-actions">
-    <button pButton type="submit" label="Sauvegarder" icon="pi pi-save" 
-           class="p-button-raised" [loading]="loading" [disabled]="infoForm.invalid"></button>
+    <button pButton type="submit" label="Sauvegarder" icon="pi pi-save" class="p-button-raised" [loading]="loading"
+      [disabled]="infoForm.invalid"></button>
   </div>
+
 </form>

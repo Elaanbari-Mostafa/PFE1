@@ -34,6 +34,12 @@
   color: var(--text-color);
 }
 
+::ng-deep {
+  .p-inputchips {
+    width: -webkit-fill-available;
+  }
+}
+
 .form-group input,
 .form-group textarea {
   width: 100%;
@@ -48,6 +54,7 @@
   .form-grid {
     grid-template-columns: 1fr;
   }
+
   .form-group.full-width {
     grid-column: span 1;
   }

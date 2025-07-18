@@ -48,7 +48,7 @@ export class InformationsPersonnellesComponent implements OnInit {
       dateNaissance: [''],
       nomUtilisateur: ['', Validators.required],
       titrePro: ['', Validators.required],
-      descPro: [''],
+      surMoi: [''],
       nationalite: [''],
       pays: ['', Validators.required],
       ville: ['', Validators.required],
@@ -123,6 +123,10 @@ export class InformationsPersonnellesComponent implements OnInit {
       // TODO: Implémenter l'upload de photo
       console.log(`Photo ${type} sélectionnée:`, file);
     }
+  }
+
+  onCVSelect(event:any){
+
   }
   
   // Helper methods for form validation

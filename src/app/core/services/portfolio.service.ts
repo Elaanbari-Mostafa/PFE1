@@ -104,16 +104,16 @@ export class PortfolioService {
 
   // Types de compétences et projets
   private typesCompetences = signal<TypeCompetence[]>([
-    { id: '1', nom: 'Technique', description: 'Compétences techniques', utilisateurId: '1' },
-    { id: '2', nom: 'Soft Skills', description: 'Compétences comportementales', utilisateurId: '1' },
-    { id: '3', nom: 'Langues', description: 'Compétences linguistiques', utilisateurId: '1' }
+    { id: '1', nom: 'Technique',  utilisateurId: '1' },
+    { id: '2', nom: 'Soft Skills', utilisateurId: '1' },
+    { id: '3', nom: 'Langues', utilisateurId: '1' }
   ]);
   
   private typesProjets = signal<TypeProjet[]>([
-    { id: '1', nom: 'Web', description: 'Projets web', utilisateurId: '1' },
-    { id: '2', nom: 'Mobile', description: 'Applications mobiles', utilisateurId: '1' },
-    { id: '3', nom: 'Desktop', description: 'Applications desktop', utilisateurId: '1' },
-    { id: '4', nom: 'Design', description: 'Projets de design', utilisateurId: '1' }
+    { id: '1', nom: 'Web', utilisateurId: '1' },
+    { id: '2', nom: 'Mobile', utilisateurId: '1' },
+    { id: '3', nom: 'Desktop', utilisateurId: '1' },
+    { id: '4', nom: 'Design', utilisateurId: '1' }
   ]);
 
   // Informations personnelles
