@@ -10,19 +10,20 @@
 <p-table [value]="services" styleClass="p-datatable-striped">
   <ng-template pTemplate="header">
     <tr>
-      <th>Nom</th>
+      <th>Service</th>
       <th>Description</th>
-      <th>Prix</th>
-      <th>Durée</th>
       <th>Actions</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-service>
     <tr>
-      <td>{{ service.nom }}</td>
+      <td>
+        <div class="service-info">
+          <i [class]="service.icone" class="service-icon"></i>
+          {{ service.nom }}
+        </div>
+      </td>
       <td>{{ truncateText(service.description, 80) }}</td>
-      <td>{{ service.prix ? (service.prix + ' €') : 'Sur devis' }}</td>
-      <td>{{ service.duree || '-' }}</td>
       <td>
         <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
                (click)="editService(service)"></button>
@@ -43,20 +44,28 @@
                placeholder="Ex: Développement d'application web" />
       </div>
       <div class="form-group full-width">
+        <label for="icone">Icône *</label>
+        <p-dropdown id="icone" formControlName="icone" 
+                   [options]="iconesDisponibles" optionLabel="label" optionValue="value"
+                   placeholder="Sélectionner une icône">
+          <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div class="icon-option" *ngIf="selectedOption">
+              <i [class]="selectedOption.value"></i>
+              <span>{{ selectedOption.label }}</span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="item" let-option>
+            <div class="icon-option">
+              <i [class]="option.value"></i>
+              <span>{{ option.label }}</span>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div class="form-group full-width">
         <label for="description">Description *</label>
         <textarea pInputTextarea id="description" formControlName="description" 
                  rows="4" placeholder="Décrivez votre service en détail..."></textarea>
-      </div>
-      <div class="form-group">
-        <label for="prix">Prix (€)</label>
-        <p-inputNumber id="prix" formControlName="prix" 
-                      mode="currency" currency="EUR" locale="fr-FR"
-                      placeholder="Laisser vide pour 'Sur devis'"></p-inputNumber>
-      </div>
-      <div class="form-group">
-        <label for="duree">Durée estimée</label>
-        <input pInputText id="duree" formControlName="duree" 
-               placeholder="Ex: 2-3 semaines, 1 mois..." />
       </div>
     </div>
     <div class="dialog-actions">

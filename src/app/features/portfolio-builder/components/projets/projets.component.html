@@ -12,8 +12,8 @@
     <tr>
       <th>Titre</th>
       <th>Type</th>
-      <th>Période</th>
       <th>Technologies</th>
+      <th>Lien Démo</th>
       <th>Actions</th>
     </tr>
   </ng-template>
@@ -21,12 +21,17 @@
     <tr>
       <td>{{ projet.titre }}</td>
       <td>{{ getTypeProjetName(projet.typeProjetId) }}</td>
-      <td>{{ formatPeriode(projet.dateDebut, projet.dateFin) }}</td>
       <td>
         <span *ngFor="let tech of projet.technologies.slice(0, 3)" class="tech-tag">{{ tech }}</span>
         <span *ngIf="projet.technologies.length > 3" class="tech-more">
           +{{ projet.technologies.length - 3 }}
         </span>
+      </td>
+      <td>
+        <a *ngIf="projet.lienDemo" [href]="projet.lienDemo" target="_blank" class="demo-link">
+          <i class="pi pi-external-link"></i> Voir
+        </a>
+        <span *ngIf="!projet.lienDemo" class="text-muted">-</span>
       </td>
       <td>
         <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
@@ -44,24 +49,18 @@
     <div class="form-grid">
       <div class="form-group">
         <label for="titre">Titre *</label>
-        <input pInputText id="titre" formControlName="titre" />
+        <input pInputText id="titre" formControlName="titre" placeholder="Nom du projet" />
       </div>
       <div class="form-group">
         <label for="typeProjetId">Type *</label>
         <p-dropdown id="typeProjetId" formControlName="typeProjetId" 
-                   [options]="typesProjets" optionLabel="nom" optionValue="id"></p-dropdown>
-      </div>
-      <div class="form-group">
-        <label for="dateDebut">Date de début *</label>
-        <p-calendar id="dateDebut" formControlName="dateDebut" [showIcon]="true"></p-calendar>
-      </div>
-      <div class="form-group">
-        <label for="dateFin">Date de fin</label>
-        <p-calendar id="dateFin" formControlName="dateFin" [showIcon]="true"></p-calendar>
+                   [options]="typesProjets" optionLabel="nom" optionValue="id"
+                   placeholder="Sélectionner un type"></p-dropdown>
       </div>
       <div class="form-group full-width">
         <label for="description">Description *</label>
-        <textarea pInputTextarea id="description" formControlName="description" rows="3"></textarea>
+        <textarea pInputTextarea id="description" formControlName="description" 
+                 rows="3" placeholder="Décrivez votre projet..."></textarea>
       </div>
       <div class="form-group full-width">
         <label for="technologies">Technologies</label>
@@ -73,8 +72,11 @@
         <input pInputText id="lienDemo" formControlName="lienDemo" placeholder="https://" />
       </div>
       <div class="form-group">
-        <label for="lienCode">Lien code source</label>
-        <input pInputText id="lienCode" formControlName="lienCode" placeholder="https://" />
+        <label>Image du projet</label>
+        <p-fileUpload mode="basic" name="projetImage" accept="image/*" 
+                     [maxFileSize]="2000000" chooseLabel="Choisir une image"
+                     (onSelect)="onImageSelect($event)"></p-fileUpload>
+        <small class="p-help">Format accepté: JPG, PNG (max 2MB)</small>
       </div>
     </div>
     <div class="dialog-actions">

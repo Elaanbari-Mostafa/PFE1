@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { TextareaModule } from 'primeng/textarea';
 import { DataViewModule } from 'primeng/dataview';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -20,7 +19,7 @@ import { TypeCompetence, TypeProjet } from '../../../../core/models/portfolio.mo
   standalone: true,
   imports: [
     CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule,
-    TextareaModule, DataViewModule, DialogModule, ConfirmDialogModule,
+    DataViewModule, DialogModule, ConfirmDialogModule,
     TabViewModule, CardModule, TooltipModule
   ],
   templateUrl: './types-management.component.html',
@@ -52,13 +51,11 @@ export class TypesManagementComponent implements OnInit {
     private confirmationService: ConfirmationService
   ) {
     this.competenceTypeForm = this.fb.group({
-      nom: ['', Validators.required],
-      description: ['']
+      nom: ['', Validators.required]
     });
     
     this.projetTypeForm = this.fb.group({
-      nom: ['', Validators.required],
-      description: ['']
+      nom: ['', Validators.required]
     });
   }
   

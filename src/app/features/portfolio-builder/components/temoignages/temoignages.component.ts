@@ -4,21 +4,24 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
+import { RatingModule } from 'primeng/rating';
 import { PortfolioService } from '../../../../core/services/portfolio.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Temoignage } from '../../../../core/models/portfolio.model';
 import { TextareaModule } from 'primeng/textarea';
+import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-temoignages',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule,
-    TextareaModule, TableModule, DialogModule, ConfirmDialogModule, FileUploadModule
+    CommonModule, ReactiveFormsModule, FormsModule, ButtonModule, InputTextModule,
+    TextareaModule, TableModule, DialogModule, ConfirmDialogModule, 
+    FileUploadModule, RatingModule
   ],
   templateUrl: './temoignages.component.html',
   styleUrls: ['./temoignages.component.scss']
@@ -43,6 +46,7 @@ export class TemoignagesComponent implements OnInit {
       poste: ['', Validators.required],
       entreprise: ['', Validators.required],
       contenu: ['', Validators.required],
+      rate: [5, [Validators.required, Validators.min(1), Validators.max(5)]],
       photo: ['']
     });
   }
@@ -59,6 +63,7 @@ export class TemoignagesComponent implements OnInit {
     this.editMode = false;
     this.currentTemoignage = null;
     this.temoignageForm.reset();
+    this.temoignageForm.patchValue({ rate: 5 });
     this.displayDialog = true;
   }
   
@@ -137,6 +142,10 @@ export class TemoignagesComponent implements OnInit {
       // TODO: Implémenter l'upload de photo
       console.log('Photo sélectionnée:', file);
     }
+  }
+  
+  getStarsArray(rate: number): number[] {
+    return Array(5).fill(0).map((_, i) => i < rate ? 1 : 0);
   }
   
   truncateText(text: string, maxLength: number): string {

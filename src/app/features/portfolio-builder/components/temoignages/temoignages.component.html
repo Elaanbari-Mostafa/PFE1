@@ -13,6 +13,7 @@
       <th>Auteur</th>
       <th>Poste</th>
       <th>Entreprise</th>
+      <th>Note</th>
       <th>Contenu</th>
       <th>Actions</th>
     </tr>
@@ -22,6 +23,9 @@
       <td>{{ temoignage.auteur }}</td>
       <td>{{ temoignage.poste }}</td>
       <td>{{ temoignage.entreprise }}</td>
+      <td>
+        <p-rating [ngModel]="temoignage.rate" [readonly]="true" [cancel]="false"></p-rating>
+      </td>
       <td>{{ truncateText(temoignage.contenu, 100) }}</td>
       <td>
         <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
@@ -48,6 +52,10 @@
       <div class="form-group full-width">
         <label for="entreprise">Entreprise *</label>
         <input pInputText id="entreprise" formControlName="entreprise" />
+      </div>
+      <div class="form-group">
+        <label for="rate">Note *</label>
+        <p-rating formControlName="rate" [cancel]="false"></p-rating>
       </div>
       <div class="form-group full-width">
         <label for="contenu">Témoignage *</label>

@@ -5,6 +5,28 @@
   margin-bottom: 2rem;
 }
 
+.service-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.service-icon {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.icon-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-option i {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

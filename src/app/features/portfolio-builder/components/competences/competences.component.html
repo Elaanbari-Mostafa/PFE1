@@ -1,4 +1,4 @@
-<div class="section-header ">
+<div class="section-header">
   <div class="text-left">
     <h2>Compétences</h2>
     <p>Gérez vos compétences techniques et comportementales</p>
@@ -13,6 +13,7 @@
       <th>Nom</th>
       <th>Type</th>
       <th>Niveau</th>
+      <th>Progression</th>
       <th>Actions</th>
     </tr>
   </ng-template>
@@ -25,6 +26,11 @@
                [severity]="getNiveauSeverity(competence.niveau)"></p-tag>
       </td>
       <td>
+        <div class="niveau-container">
+          <p-progressBar [value]="competence.niveau" [showValue]="true"></p-progressBar>
+        </div>
+      </td>
+      <td>
         <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
                (click)="editCompetence(competence)"></button>
         <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" 
@@ -35,7 +41,7 @@
 </p-table>
 
 <p-dialog header="{{editMode ? 'Modifier' : 'Ajouter'}} une compétence" 
-         [(visible)]="displayDialog" [modal]="true" [style]="{width: '450px'}">
+         [(visible)]="displayDialog" [modal]="true" [style]="{width: '500px'}">
   <form [formGroup]="competenceForm" (ngSubmit)="saveCompetence()">
     <div class="form-group">
       <label for="nom">Nom de la compétence *</label>
@@ -52,13 +58,17 @@
     </div>
     
     <div class="form-group">
-      <label for="niveau">Niveau * ({{ getNiveauLabel(niveauValue) }})</label>
-      <p-slider formControlName="niveau" [min]="1" [max]="4" [step]="1" class="w-full"></p-slider>
+      <label for="niveau">Niveau * ({{ niveauValue }}% - {{ getNiveauLabel(niveauValue) }})</label>
+      <p-slider formControlName="niveau" [min]="1" [max]="100" [step]="1" class="w-full"></p-slider>
       <div class="niveau-labels">
-        <span>Débutant</span>
-        <span>Intermédiaire</span>
-        <span>Avancé</span>
-        <span>Expert</span>
+        <span>1%</span>
+        <span>25%</span>
+        <span>50%</span>
+        <span>75%</span>
+        <span>100%</span>
+      </div>
+      <div class="niveau-preview">
+        <p-progressBar [value]="niveauValue" [showValue]="true"></p-progressBar>
       </div>
       <small *ngIf="niveau?.invalid && niveau?.touched" class="p-error">Le niveau est requis</small>
     </div>

@@ -47,7 +47,8 @@ export class PlanManagementComponent implements OnInit {
     this.planForm = this.fb.group({
       nom: ['', Validators.required],
       prix: [0, [Validators.required, Validators.min(0)]],
-      dureeEnJours: [30, [Validators.required, Validators.min(1)]]
+      dureeEnJours: [30, [Validators.required, Validators.min(1)]],
+      popular: [false]
     });
   }
 

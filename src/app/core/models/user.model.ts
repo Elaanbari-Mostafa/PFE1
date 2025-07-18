@@ -33,6 +33,7 @@ export interface PlanAbonnement {
   nom: string;
   prix: number;
   dureeEnJours: number;
+  popular: boolean;
   avantages: AvantageAbonnement[];
 }
 
@@ -56,4 +57,5 @@ export interface Theme {
   id: string;
   nom: string;
   active: boolean;
+  image: string;
 }

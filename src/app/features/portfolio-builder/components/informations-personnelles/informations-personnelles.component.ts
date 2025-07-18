@@ -4,9 +4,10 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ChipsModule } from 'primeng/chips';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { PortfolioService } from '../../../../core/services/portfolio.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { TextareaModule } from 'primeng/textarea';
@@ -21,7 +22,9 @@ import { TextareaModule } from 'primeng/textarea';
     InputTextModule,
     TextareaModule,
     CalendarModule,
-    FileUploadModule
+    FileUploadModule,
+    ChipsModule,
+    InputNumberModule
   ],
   templateUrl: './informations-personnelles.component.html',
   styleUrls: ['./informations-personnelles.component.scss']
@@ -43,9 +46,20 @@ export class InformationsPersonnellesComponent implements OnInit {
       telephone: [''],
       adresse: ['', Validators.required],
       dateNaissance: [''],
+      nomUtilisateur: ['', Validators.required],
+      titrePro: ['', Validators.required],
+      descPro: [''],
       nationalite: [''],
-      description: [''],
-      photo: ['']
+      pays: ['', Validators.required],
+      ville: ['', Validators.required],
+      languages: [[]],
+      photoProfilOriginalePath: [''],
+      photoProfilSecondairePath: [''],
+      projetsTermines: [0, [Validators.min(0)]],
+      recompenses: [0, [Validators.min(0)]],
+      clientsSatisfaits: [0, [Validators.min(0)]],
+      anneesExperience: [0, [Validators.min(0)]],
+      description: ['']
     });
   }
   
@@ -60,7 +74,9 @@ export class InformationsPersonnellesComponent implements OnInit {
         nom: user.nom,
         prenom: user.prenom,
         email: user.email,
-        adresse: user.adresse
+        adresse: user.adresse,
+        nomUtilisateur: user.nomUtilisateur,
+        titrePro: user.titreProf
       });
     }
     
@@ -101,16 +117,21 @@ export class InformationsPersonnellesComponent implements OnInit {
     }
   }
   
-  onPhotoSelect(event: any) {
+  onPhotoSelect(event: any, type: 'original' | 'secondaire') {
     const file = event.files[0];
     if (file) {
       // TODO: Implémenter l'upload de photo
-      console.log('Photo sélectionnée:', file);
+      console.log(`Photo ${type} sélectionnée:`, file);
     }
   }
   
+  // Helper methods for form validation
   get nom() { return this.infoForm.get('nom'); }
   get prenom() { return this.infoForm.get('prenom'); }
   get email() { return this.infoForm.get('email'); }
   get adresse() { return this.infoForm.get('adresse'); }
+  get nomUtilisateur() { return this.infoForm.get('nomUtilisateur'); }
+  get titrePro() { return this.infoForm.get('titrePro'); }
+  get pays() { return this.infoForm.get('pays'); }
+  get ville() { return this.infoForm.get('ville'); }
 }

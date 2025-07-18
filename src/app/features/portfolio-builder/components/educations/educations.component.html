@@ -12,7 +12,7 @@
     <tr>
       <th>Diplôme</th>
       <th>Institution</th>
-      <th>Domaine</th>
+      <th>Lieu</th>
       <th>Période</th>
       <th>Actions</th>
     </tr>
@@ -21,7 +21,7 @@
     <tr>
       <td>{{ education.diplome }}</td>
       <td>{{ education.institution }}</td>
-      <td>{{ education.domaine }}</td>
+      <td>{{ education.lieu }}</td>
       <td>{{ formatPeriode(education.dateDebut, education.dateFin) }}</td>
       <td>
         <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
@@ -48,9 +48,9 @@
                placeholder="Ex: Université de Paris" />
       </div>
       <div class="form-group full-width">
-        <label for="domaine">Domaine d'étude *</label>
-        <input pInputText id="domaine" formControlName="domaine" 
-               placeholder="Ex: Informatique, Génie logiciel" />
+        <label for="lieu">Lieu *</label>
+        <input pInputText id="lieu" formControlName="lieu" 
+               placeholder="Ex: Paris, France" />
       </div>
       <div class="form-group">
         <label for="dateDebut">Date de début *</label>

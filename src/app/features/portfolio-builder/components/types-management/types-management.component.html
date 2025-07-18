@@ -3,105 +3,88 @@
     <h2>Gestion des Types</h2>
     <p>Gérez vos types de compétences et de projets personnalisés</p>
   </div>
-  <div class="tab-buttons">
-    <button pButton 
-            [label]="'Types de Compétences'" 
-            icon="pi pi-star"
-            [class]="activeTab === 'competences' ? 'p-button-raised' : 'p-button-outlined'"
-            (click)="activeTab = 'competences'"></button>
-    <button pButton 
-            [label]="'Types de Projets'" 
-            icon="pi pi-briefcase"
-            [class]="activeTab === 'projets' ? 'p-button-raised' : 'p-button-outlined'"
-            (click)="activeTab = 'projets'"></button>
-  </div>
-  <div class="tab-content">
-    <!-- Types de Compétences -->
-    <div *ngIf="activeTab === 'competences'">
+  
+  <p-tabView [(activeIndex)]="activeTab === 'competences' ? 0 : 1" 
+             (onChange)="activeTab = $event.index === 0 ? 'competences' : 'projets'">
+    
+    <!-- Onglet Types de Compétences -->
+    <p-tabPanel header="Types de Compétences" leftIcon="pi pi-star">
       <div class="tab-content">
         <div class="tab-header">
           <h3>Types de Compétences</h3>
           <button pButton label="Ajouter un type" icon="pi pi-plus" 
                  class="p-button-raised" (click)="showCompetenceDialog()"></button>
         </div>
-        <p-dataView [value]="typesCompetences" layout="grid" [paginator]="true" [rows]="6">
-          <ng-template pTemplate="grid" let-type>
-            <div class="col-12 md:col-6 lg:col-4 p-2">
-              <div class="type-card">
-                <div class="type-header">
-                  <div class="type-icon">
-                    <i class="pi pi-star"></i>
-                  </div>
-                  <div class="type-actions">
-                    <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
-                           (click)="editTypeCompetence(type)" pTooltip="Modifier"></button>
-                    <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" 
-                           (click)="deleteTypeCompetence(type)" pTooltip="Supprimer"></button>
-                  </div>
-                </div>
-                <h4>{{ type.nom }}</h4>
-                <p>{{ type.description || 'Aucune description' }}</p>
-                <div class="type-stats">
-                  <small>{{ getCompetenceCount(type.id) }} compétence(s)</small>
-                </div>
+        
+        <div class="types-grid">
+          <div *ngFor="let type of typesCompetences" class="type-card">
+            <div class="type-header">
+              <div class="type-icon">
+                <i class="pi pi-star"></i>
+              </div>
+              <div class="type-actions">
+                <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
+                       (click)="editTypeCompetence(type)" pTooltip="Modifier"></button>
+                <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" 
+                       (click)="deleteTypeCompetence(type)" pTooltip="Supprimer"></button>
               </div>
             </div>
-          </ng-template>
-          <ng-template pTemplate="empty">
-            <div class="empty-state">
-              <i class="pi pi-star" style="font-size: 3rem; color: #ccc;"></i>
-              <h3>Aucun type de compétence</h3>
-              <p>Créez votre premier type de compétence personnalisé</p>
+            <h4>{{ type.nom }}</h4>
+            <div class="type-stats">
+              <small>{{ getCompetenceCount(type.id) }} compétence(s)</small>
             </div>
-          </ng-template>
-        </p-dataView>
+          </div>
+        </div>
+        
+        <div *ngIf="typesCompetences.length === 0" class="empty-state">
+          <i class="pi pi-star" style="font-size: 3rem; color: #ccc;"></i>
+          <h3>Aucun type de compétence</h3>
+          <p>Créez votre premier type de compétence personnalisé</p>
+        </div>
       </div>
-    </div>
-    <!-- Types de Projets -->
-    <div *ngIf="activeTab === 'projets'">
+    </p-tabPanel>
+    
+    <!-- Onglet Types de Projets -->
+    <p-tabPanel header="Types de Projets" leftIcon="pi pi-briefcase">
       <div class="tab-content">
         <div class="tab-header">
           <h3>Types de Projets</h3>
           <button pButton label="Ajouter un type" icon="pi pi-plus" 
                  class="p-button-raised" (click)="showProjetDialog()"></button>
         </div>
-        <p-dataView [value]="typesProjets" layout="grid" [paginator]="true" [rows]="6">
-          <ng-template pTemplate="grid" let-type>
-            <div class="col-12 md:col-6 lg:col-4 p-2">
-              <div class="type-card">
-                <div class="type-header">
-                  <div class="type-icon">
-                    <i class="pi pi-briefcase"></i>
-                  </div>
-                  <div class="type-actions">
-                    <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
-                           (click)="editTypeProjet(type)" pTooltip="Modifier"></button>
-                    <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" 
-                           (click)="deleteTypeProjet(type)" pTooltip="Supprimer"></button>
-                  </div>
-                </div>
-                <h4>{{ type.nom }}</h4>
-                <p>{{ type.description || 'Aucune description' }}</p>
-                <div class="type-stats">
-                  <small>{{ getProjetCount(type.id) }} projet(s)</small>
-                </div>
+        
+        <div class="types-grid">
+          <div *ngFor="let type of typesProjets" class="type-card">
+            <div class="type-header">
+              <div class="type-icon">
+                <i class="pi pi-briefcase"></i>
+              </div>
+              <div class="type-actions">
+                <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
+                       (click)="editTypeProjet(type)" pTooltip="Modifier"></button>
+                <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" 
+                       (click)="deleteTypeProjet(type)" pTooltip="Supprimer"></button>
               </div>
             </div>
-          </ng-template>
-          <ng-template pTemplate="empty">
-            <div class="empty-state">
-              <i class="pi pi-briefcase" style="font-size: 3rem; color: #ccc;"></i>
-              <h3>Aucun type de projet</h3>
-              <p>Créez votre premier type de projet personnalisé</p>
+            <h4>{{ type.nom }}</h4>
+            <div class="type-stats">
+              <small>{{ getProjetCount(type.id) }} projet(s)</small>
             </div>
-          </ng-template>
-        </p-dataView>
+          </div>
+        </div>
+        
+        <div *ngIf="typesProjets.length === 0" class="empty-state">
+          <i class="pi pi-briefcase" style="font-size: 3rem; color: #ccc;"></i>
+          <h3>Aucun type de projet</h3>
+          <p>Créez votre premier type de projet personnalisé</p>
+        </div>
       </div>
-    </div>
-  </div>
+    </p-tabPanel>
+  </p-tabView>
+  
   <!-- Dialog pour Types de Compétences -->
   <p-dialog header="{{editModeCompetence ? 'Modifier' : 'Ajouter'}} un type de compétence" 
-           [(visible)]="displayCompetenceDialog" [modal]="true" [style]="{width: '500px'}">
+           [(visible)]="displayCompetenceDialog" [modal]="true" [style]="{width: '400px'}">
     <form [formGroup]="competenceTypeForm" (ngSubmit)="saveTypeCompetence()">
       <div class="form-group">
         <label for="nomCompetence">Nom du type *</label>
@@ -109,11 +92,6 @@
                placeholder="Ex: Langages de programmation, Frameworks..." />
         <small *ngIf="competenceTypeForm.get('nom')?.invalid && competenceTypeForm.get('nom')?.touched" 
                class="p-error">Le nom est requis</small>
-      </div>
-      <div class="form-group">
-        <label for="descriptionCompetence">Description</label>
-        <textarea pInputTextarea id="descriptionCompetence" formControlName="description" 
-                 rows="3" placeholder="Description du type de compétence..."></textarea>
       </div>
       <div class="dialog-actions">
         <button pButton type="button" label="Annuler" class="p-button-text" 
@@ -123,9 +101,10 @@
       </div>
     </form>
   </p-dialog>
+  
   <!-- Dialog pour Types de Projets -->
   <p-dialog header="{{editModeProjet ? 'Modifier' : 'Ajouter'}} un type de projet" 
-           [(visible)]="displayProjetDialog" [modal]="true" [style]="{width: '500px'}">
+           [(visible)]="displayProjetDialog" [modal]="true" [style]="{width: '400px'}">
     <form [formGroup]="projetTypeForm" (ngSubmit)="saveTypeProjet()">
       <div class="form-group">
         <label for="nomProjet">Nom du type *</label>
@@ -133,11 +112,6 @@
                placeholder="Ex: Application Web, Application Mobile..." />
         <small *ngIf="projetTypeForm.get('nom')?.invalid && projetTypeForm.get('nom')?.touched" 
                class="p-error">Le nom est requis</small>
-      </div>
-      <div class="form-group">
-        <label for="descriptionProjet">Description</label>
-        <textarea pInputTextarea id="descriptionProjet" formControlName="description" 
-                 rows="3" placeholder="Description du type de projet..."></textarea>
       </div>
       <div class="dialog-actions">
         <button pButton type="button" label="Annuler" class="p-button-text" 
@@ -147,5 +121,6 @@
       </div>
     </form>
   </p-dialog>
+  
   <p-confirmDialog></p-confirmDialog>
 </div>

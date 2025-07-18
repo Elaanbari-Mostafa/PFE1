@@ -4,13 +4,12 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-
 import { DropdownModule } from 'primeng/dropdown';
-import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FileUploadModule } from 'primeng/fileupload';
 import { PortfolioService } from '../../../../core/services/portfolio.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Projet, TypeProjet } from '../../../../core/models/portfolio.model';
@@ -21,8 +20,8 @@ import { TextareaModule } from 'primeng/textarea';
   standalone: true,
   imports: [
     CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule,
-    TextareaModule, DropdownModule, CalendarModule, ChipsModule,
-    TableModule, DialogModule, ConfirmDialogModule
+    TextareaModule, DropdownModule, ChipsModule,
+    TableModule, DialogModule, ConfirmDialogModule, FileUploadModule
   ],
   templateUrl: './projets.component.html',
   styleUrls: ['./projets.component.scss']
@@ -46,11 +45,9 @@ export class ProjetsComponent implements OnInit {
     this.projetForm = this.fb.group({
       titre: ['', Validators.required],
       description: ['', Validators.required],
-      dateDebut: ['', Validators.required],
-      dateFin: [''],
       technologies: [[]],
       lienDemo: [''],
-      lienCode: [''],
+      projetImage: [''],
       typeProjetId: ['', Validators.required]
     });
   }
@@ -84,11 +81,7 @@ export class ProjetsComponent implements OnInit {
   editProjet(projet: Projet) {
     this.editMode = true;
     this.currentProjet = projet;
-    this.projetForm.patchValue({
-      ...projet,
-      dateDebut: new Date(projet.dateDebut),
-      dateFin: projet.dateFin ? new Date(projet.dateFin) : null
-    });
+    this.projetForm.patchValue(projet);
     this.displayDialog = true;
   }
   
@@ -149,13 +142,15 @@ export class ProjetsComponent implements OnInit {
     });
   }
   
-  getTypeProjetName(typeId: string): string {
-    return this.typesProjets.find(t => t.id === typeId)?.nom || '';
+  onImageSelect(event: any) {
+    const file = event.files[0];
+    if (file) {
+      // TODO: Implémenter l'upload d'image
+      console.log('Image sélectionnée:', file);
+    }
   }
   
-  formatPeriode(debut: Date, fin?: Date): string {
-    const debutStr = new Date(debut).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
-    const finStr = fin ? new Date(fin).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' }) : 'En cours';
-    return `${debutStr} - ${finStr}`;
+  getTypeProjetName(typeId: string): string {
+    return this.typesProjets.find(t => t.id === typeId)?.nom || '';
   }
 }

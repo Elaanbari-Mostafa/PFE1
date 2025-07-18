@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
@@ -42,7 +41,7 @@ export class EducationsComponent implements OnInit {
     this.educationForm = this.fb.group({
       diplome: ['', Validators.required],
       institution: ['', Validators.required],
-      domaine: ['', Validators.required],
+      lieu: ['', Validators.required],
       dateDebut: ['', Validators.required],
       dateFin: [''],
       description: ['']

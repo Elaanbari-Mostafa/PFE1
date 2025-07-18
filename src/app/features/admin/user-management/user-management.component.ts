@@ -115,11 +115,33 @@ export class UserManagementComponent implements OnInit {
   }
 
   editUser(user: User) {
-    // TODO: Implémenter l'édition d'utilisateur
     this.messageService.add({
       severity: 'info',
       summary: 'Fonctionnalité',
       detail: 'Édition d\'utilisateur à implémenter'
+    });
+  }
+
+  activateUser(user: User) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Utilisateur activé',
+      detail: `${user.prenom} ${user.nom} a été activé`
+    });
+  }
+
+  deactivateUser(user: User) {
+    this.confirmationService.confirm({
+      message: `Voulez-vous désactiver l'utilisateur ${user.prenom} ${user.nom} ?`,
+      header: 'Désactiver l\'utilisateur',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Utilisateur désactivé',
+          detail: `${user.prenom} ${user.nom} a été désactivé`
+        });
+      }
     });
   }
 

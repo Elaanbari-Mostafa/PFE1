@@ -6,8 +6,19 @@ export interface InformationPersonnelle {
   telephone?: string;
   adresse: string;
   dateNaissance?: Date;
+  nomUtilisateur: string;
+  titrePro: string;
+  descPro: string;
   nationalite?: string;
-  photo?: string;
+  pays: string;
+  ville: string;
+  languages: string[];
+  photoProfilOriginalePath?: string;
+  photoProfilSecondairePath?: string;
+  projetsTermines: number;
+  recompenses: number;
+  clientsSatisfaits: number;
+  anneesExperience: number;
   description?: string;
   utilisateurId: string;
 }
@@ -15,7 +26,7 @@ export interface InformationPersonnelle {
 export interface Competence {
   id: string;
   nom: string;
-  niveau: 'debutant' | 'intermediaire' | 'avance' | 'expert';
+  niveau: number; // 1 to 100
   typeCompetenceId: string;
   utilisateurId: string;
 }
@@ -23,7 +34,6 @@ export interface Competence {
 export interface TypeCompetence {
   id: string;
   nom: string;
-  description?: string;
   utilisateurId: string;
 }
 
@@ -31,12 +41,9 @@ export interface Projet {
   id: string;
   titre: string;
   description: string;
-  dateDebut: Date;
-  dateFin?: Date;
   technologies: string[];
   lienDemo?: string;
-  lienCode?: string;
-  images?: string[];
+  projetImage?: string;
   typeProjetId: string;
   utilisateurId: string;
 }
@@ -44,7 +51,6 @@ export interface Projet {
 export interface TypeProjet {
   id: string;
   nom: string;
-  description?: string;
   utilisateurId: string;
 }
 
@@ -63,7 +69,7 @@ export interface Education {
   id: string;
   institution: string;
   diplome: string;
-  domaine: string;
+  lieu: string;
   dateDebut: Date;
   dateFin?: Date;
   description?: string;
@@ -76,6 +82,7 @@ export interface Temoignage {
   poste: string;
   entreprise: string;
   contenu: string;
+  rate: number; // 1 to 5 stars
   photo?: string;
   dateCreation: Date;
   utilisateurId: string;
@@ -85,8 +92,7 @@ export interface Service {
   id: string;
   nom: string;
   description: string;
-  prix?: number;
-  duree?: string;
+  icone: string;
   utilisateurId: string;
 }
 

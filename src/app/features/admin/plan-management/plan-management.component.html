@@ -18,6 +18,7 @@
                 <th>Nom</th>
                 <th>Prix</th>
                 <th>Durée</th>
+                <th>Populaire</th>
                 <th>Avantages</th>
                 <th>Actions</th>
             </tr>
@@ -27,6 +28,10 @@
                 <td>{{ plan.nom }}</td>
                 <td>{{ plan.prix }}€</td>
                 <td>{{ plan.dureeEnJours }} jours</td>
+                <td>
+                    <p-tag [value]="plan.popular ? 'Oui' : 'Non'" 
+                           [severity]="plan.popular ? 'success' : 'secondary'"></p-tag>
+                </td>
                 <td>{{ plan.avantages.length }} avantage(s)</td>
                 <td>
                     <div class="action-buttons">
@@ -59,6 +64,12 @@
                 <div class="form-group">
                     <label for="dureeEnJours">Durée (jours) *</label>
                     <p-inputNumber id="dureeEnJours" formControlName="dureeEnJours"></p-inputNumber>
+                </div>
+                <div class="form-group">
+                    <label for="popular">Plan populaire</label>
+                    <p-toggleButton id="popular" formControlName="popular" 
+                                   onLabel="Oui" offLabel="Non"
+                                   onIcon="pi pi-star" offIcon="pi pi-star"></p-toggleButton>
                 </div>
             </div>
             <div class="avantages-section">

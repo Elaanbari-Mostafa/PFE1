@@ -4,8 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-
-import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -19,7 +18,7 @@ import { TextareaModule } from 'primeng/textarea';
   standalone: true,
   imports: [
     CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule,
-    TextareaModule, InputNumberModule, TableModule, DialogModule, ConfirmDialogModule
+    TextareaModule, DropdownModule, TableModule, DialogModule, ConfirmDialogModule
   ],
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss']
@@ -32,6 +31,21 @@ export class ServicesComponent implements OnInit {
   currentService: Service | null = null;
   loading = false;
   
+  iconesDisponibles = [
+    { label: 'Code', value: 'pi pi-code' },
+    { label: 'Design', value: 'pi pi-palette' },
+    { label: 'Mobile', value: 'pi pi-mobile' },
+    { label: 'Web', value: 'pi pi-globe' },
+    { label: 'Database', value: 'pi pi-database' },
+    { label: 'Cloud', value: 'pi pi-cloud' },
+    { label: 'Analytics', value: 'pi pi-chart-bar' },
+    { label: 'Security', value: 'pi pi-shield' },
+    { label: 'Support', value: 'pi pi-headphones' },
+    { label: 'Consulting', value: 'pi pi-users' },
+    { label: 'Settings', value: 'pi pi-cog' },
+    { label: 'Tools', value: 'pi pi-wrench' }
+  ];
+  
   constructor(
     private fb: FormBuilder,
     private portfolioService: PortfolioService,
@@ -42,8 +56,7 @@ export class ServicesComponent implements OnInit {
     this.serviceForm = this.fb.group({
       nom: ['', Validators.required],
       description: ['', Validators.required],
-      prix: [''],
-      duree: ['']
+      icone: ['pi pi-cog', Validators.required]
     });
   }
   
@@ -59,6 +72,7 @@ export class ServicesComponent implements OnInit {
     this.editMode = false;
     this.currentService = null;
     this.serviceForm.reset();
+    this.serviceForm.patchValue({ icone: 'pi pi-cog' });
     this.displayDialog = true;
   }
   
@@ -128,6 +142,11 @@ export class ServicesComponent implements OnInit {
         });
       }
     });
+  }
+  
+  getIconLabel(iconValue: string): string {
+    const icon = this.iconesDisponibles.find(i => i.value === iconValue);
+    return icon?.label || 'Icône';
   }
   
   truncateText(text: string, maxLength: number): string {

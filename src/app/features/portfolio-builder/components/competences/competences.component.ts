@@ -4,17 +4,16 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { SelectModule } from 'primeng/select';
-import { DataViewModule } from 'primeng/dataview';
+import { DropdownModule } from 'primeng/dropdown';
+import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TagModule } from 'primeng/tag';
 import { SliderModule } from 'primeng/slider';
+import { ProgressBarModule } from 'primeng/progressbar';
 import { PortfolioService } from '../../../../core/services/portfolio.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Competence, TypeCompetence } from '../../../../core/models/portfolio.model';
-import { DropdownModule } from 'primeng/dropdown';
-import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-competences',
@@ -29,7 +28,8 @@ import { TableModule } from 'primeng/table';
     DialogModule,
     ConfirmDialogModule,
     TagModule,
-    SliderModule
+    SliderModule,
+    ProgressBarModule
   ],
   templateUrl: './competences.component.html',
   styleUrls: ['./competences.component.scss']
@@ -42,7 +42,7 @@ export class CompetencesComponent implements OnInit {
   editMode = false;
   currentCompetence: Competence | null = null;
   loading = false;
-  niveauValue = 1;
+  niveauValue = 50;
   
   constructor(
     private fb: FormBuilder,
@@ -54,7 +54,7 @@ export class CompetencesComponent implements OnInit {
     this.competenceForm = this.fb.group({
       nom: ['', Validators.required],
       typeCompetenceId: ['', Validators.required],
-      niveau: [1, [Validators.required, Validators.min(1), Validators.max(4)]]
+      niveau: [50, [Validators.required, Validators.min(1), Validators.max(100)]]
     });
 
     // Écouter les changements du niveau pour l'affichage
@@ -82,8 +82,8 @@ export class CompetencesComponent implements OnInit {
     this.editMode = false;
     this.currentCompetence = null;
     this.competenceForm.reset();
-    this.competenceForm.patchValue({ niveau: 1 });
-    this.niveauValue = 1;
+    this.competenceForm.patchValue({ niveau: 50 });
+    this.niveauValue = 50;
     this.displayDialog = true;
   }
   
@@ -95,12 +95,8 @@ export class CompetencesComponent implements OnInit {
   editCompetence(competence: Competence) {
     this.editMode = true;
     this.currentCompetence = competence;
-    const niveauNumeric = this.convertNiveauToNumeric(competence.niveau);
-    this.competenceForm.patchValue({
-      ...competence,
-      niveau: niveauNumeric
-    });
-    this.niveauValue = niveauNumeric;
+    this.competenceForm.patchValue(competence);
+    this.niveauValue = competence.niveau;
     this.displayDialog = true;
   }
   
@@ -109,10 +105,8 @@ export class CompetencesComponent implements OnInit {
       this.loading = true;
       const user = this.authService.getCurrentUser();
       
-      const formValue = this.competenceForm.value;
       const data = {
-        ...formValue,
-        niveau: this.convertNumericToNiveau(formValue.niveau),
+        ...this.competenceForm.value,
         utilisateurId: user?.id || '1'
       };
       
@@ -175,57 +169,18 @@ export class CompetencesComponent implements OnInit {
     return type?.nom || '';
   }
   
-  convertNiveauToNumeric(niveau: string): number {
-    switch (niveau) {
-      case 'debutant': return 1;
-      case 'intermediaire': return 2;
-      case 'avance': return 3;
-      case 'expert': return 4;
-      default: return 1;
-    }
+  getNiveauLabel(niveau: number): string {
+    if (niveau <= 25) return 'Débutant';
+    if (niveau <= 50) return 'Intermédiaire';
+    if (niveau <= 75) return 'Avancé';
+    return 'Expert';
   }
   
-  convertNumericToNiveau(numeric: number): 'debutant' | 'intermediaire' | 'avance' | 'expert' {
-    switch (numeric) {
-      case 1: return 'debutant';
-      case 2: return 'intermediaire';
-      case 3: return 'avance';
-      case 4: return 'expert';
-      default: return 'debutant';
-    }
-  }
-  
-  getNiveauLabel(niveau: string | number): string {
-    if (typeof niveau === 'number') {
-      niveau = this.convertNumericToNiveau(niveau);
-    }
-    switch (niveau) {
-      case 'debutant': return 'Débutant';
-      case 'intermediaire': return 'Intermédiaire';
-      case 'avance': return 'Avancé';
-      case 'expert': return 'Expert';
-      default: return 'Débutant';
-    }
-  }
-  
-  getNiveauSeverity(niveau: string): string {
-    switch (niveau) {
-      case 'expert': return 'success';
-      case 'avance': return 'info';
-      case 'intermediaire': return 'warn';
-      case 'debutant': return 'secondary';
-      default: return 'secondary';
-    }
-  }
-  
-  getNiveauPercentage(niveau: string): number {
-    switch (niveau) {
-      case 'debutant': return 25;
-      case 'intermediaire': return 50;
-      case 'avance': return 75;
-      case 'expert': return 100;
-      default: return 25;
-    }
+  getNiveauSeverity(niveau: number): string {
+    if (niveau <= 25) return 'secondary';
+    if (niveau <= 50) return 'warning';
+    if (niveau <= 75) return 'info';
+    return 'success';
   }
   
   get nom() { return this.competenceForm.get('nom'); }

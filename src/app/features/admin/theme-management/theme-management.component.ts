@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 
 interface ThemeInfo {
   id: string;
-  name: string;
-  description: string;
+  nom: string;
   active: boolean;
-  premium: boolean;
+  image: string;
   usageCount: number;
 }
 
@@ -24,13 +25,15 @@ interface ThemeInfo {
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     ButtonModule,
     CardModule,
     TableModule,
     TagModule,
     DialogModule,
     InputTextModule,
-    FormsModule
+    FileUploadModule,
+    ToggleButtonModule
   ],
   templateUrl: './theme-management.component.html',
   styleUrls: ['./theme-management.component.scss']
@@ -39,6 +42,7 @@ export class AdminThemeManagementComponent implements OnInit {
   themes: ThemeInfo[] = [];
   showDialog = false;
   currentTheme: any = {};
+  loading = false;
 
   constructor(
     private messageService: MessageService,
@@ -53,25 +57,23 @@ export class AdminThemeManagementComponent implements OnInit {
     this.themes = [
       {
         id: '1',
-        name: 'Modern Pro',
-        description: 'Thème moderne et professionnel',
+        nom: 'Modern Pro',
         active: true,
-        premium: false,
+        image: '../../../assets/images/temp1.png',
         usageCount: 245
       },
       {
         id: '2',
-        name: 'Creative Studio',
-        description: 'Pour les créatifs et designers',
+        nom: 'Creative Studio',
         active: true,
-        premium: true,
+        image: '../../../assets/images/temp2.png',
         usageCount: 156
       }
     ];
   }
 
   showAddDialog() {
-    this.currentTheme = {};
+    this.currentTheme = { active: true };
     this.showDialog = true;
   }
 
@@ -85,20 +87,43 @@ export class AdminThemeManagementComponent implements OnInit {
   }
 
   saveTheme() {
+    this.loading = true;
+    setTimeout(() => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Thème sauvegardé',
+        detail: 'Le thème a été sauvegardé avec succès'
+      });
+      this.hideDialog();
+      this.loadThemes();
+      this.loading = false;
+    }, 1000);
+  }
+
+  toggleThemeStatus(theme: ThemeInfo) {
+    theme.active = !theme.active;
     this.messageService.add({
       severity: 'success',
-      summary: 'Thème sauvegardé',
-      detail: 'Le thème a été sauvegardé avec succès'
+      summary: 'Statut mis à jour',
+      detail: `Le thème ${theme.nom} est maintenant ${theme.active ? 'activé' : 'désactivé'}`
     });
-    this.hideDialog();
   }
 
   deleteTheme(theme: ThemeInfo) {
     this.messageService.add({
       severity: 'success',
       summary: 'Thème supprimé',
-      detail: `Le thème ${theme.name} a été supprimé`
+      detail: `Le thème ${theme.nom} a été supprimé`
     });
+    this.loadThemes();
+  }
+
+  onImageSelect(event: any) {
+    const file = event.files[0];
+    if (file) {
+      console.log('Image sélectionnée:', file);
+      // TODO: Implémenter l'upload d'image
+    }
   }
   
   goBack() {
