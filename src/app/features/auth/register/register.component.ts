@@ -45,8 +45,8 @@ export class RegisterComponent {
       prenom: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       nomUtilisateur: ['', [Validators.required, Validators.minLength(3)]],
-      titreProf: ['', [Validators.required]],
-      adresse: ['', [Validators.required]],
+      // titreProf: ['', [Validators.required]],
+      // adresse: ['', [Validators.required]],
       // surNom: ['', [Validators.required]],
       motDePasse: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
@@ -123,9 +123,9 @@ export class RegisterComponent {
   get prenom() { return this.registerForm.get('prenom'); }
   get email() { return this.registerForm.get('email'); }
   get nomUtilisateur() { return this.registerForm.get('nomUtilisateur'); }
-  get titreProf() { return this.registerForm.get('titreProf'); }
-  get adresse() { return this.registerForm.get('adresse'); }
-  get surNom() { return this.registerForm.get('surNom'); }
+  // get titreProf() { return this.registerForm.get('titreProf'); }
+  // get adresse() { return this.registerForm.get('adresse'); }
+  // get surNom() { return this.registerForm.get('surNom'); }
   get motDePasse() { return this.registerForm.get('motDePasse'); }
   get confirmPassword() { return this.registerForm.get('confirmPassword'); }
   get acceptTerms() { return this.registerForm.get('acceptTerms'); }

@@ -1,15 +1,14 @@
 <div class="theme-management">
   <div class="page-header">
     <div class="header-content">
-      <button pButton icon="pi pi-arrow-left" label="Retour" 
-             class="p-button-text" (click)="goBack()"></button>
+      <button pButton icon="pi pi-arrow-left" label="Retour" class="p-button-text" (click)="goBack()"></button>
       <div style="padding-left: 70px;">
         <h1>Gestion des Thèmes</h1>
         <p>Gérez les thèmes disponibles sur la plateforme</p>
       </div>
     </div>
-    <button pButton label="Ajouter un thème" icon="pi pi-plus" 
-           class="p-button-raised" (click)="showAddDialog()"></button>
+    <button pButton label="Ajouter un thème" icon="pi pi-plus" class="p-button-raised"
+      (click)="showAddDialog()"></button>
   </div>
 
   <p-table [value]="themes" styleClass="p-datatable-striped">
@@ -24,23 +23,21 @@
     </ng-template>
     <ng-template pTemplate="body" let-theme>
       <tr>
-        <td>
+        <td style="text-align: center;">
           <img [src]="theme.image" [alt]="theme.nom" class="theme-thumbnail">
         </td>
         <td>{{ theme.nom }}</td>
         <td>
-          <p-toggleButton [(ngModel)]="theme.active" 
-                         onLabel="Actif" offLabel="Inactif"
-                         onIcon="pi pi-check" offIcon="pi pi-times"
-                         (onChange)="toggleThemeStatus(theme)"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="theme.active" onLabel="Actif" offLabel="Inactif" onIcon="pi pi-check"
+            offIcon="pi pi-times" (onChange)="toggleThemeStatus(theme)"></p-toggleButton>
         </td>
         <td>{{ theme.usageCount }}</td>
         <td>
           <div class="action-buttons">
-            <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
-                   (click)="editTheme(theme)"></button>
-            <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" 
-                   (click)="deleteTheme(theme)"></button>
+            <button pButton icon="pi pi-eye" class="p-button-text p-button-sm" (click)="showTheme(theme)"></button>
+            <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" (click)="editTheme(theme)"></button>
+            <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger"
+              (click)="deleteTheme(theme)"></button>
           </div>
         </td>
       </tr>
@@ -48,29 +45,32 @@
   </p-table>
 
   <!-- Dialog d'ajout/modification -->
-  <p-dialog header="{{currentTheme.id ? 'Modifier' : 'Ajouter'}} un thème" 
-           [(visible)]="showDialog" [modal]="true" [style]="{width: '500px'}">
+  <p-dialog header="{{currentTheme.id ? 'Modifier' : 'Ajouter'}} un thème" [(visible)]="showDialog" [modal]="true"
+    [style]="{width: '500px'}">
     <div class="form-group">
       <label for="themeName">Nom du thème *</label>
       <input pInputText id="themeName" [(ngModel)]="currentTheme.nom" class="w-full" />
     </div>
     <div class="form-group">
       <label>Image du thème *</label>
-      <p-fileUpload mode="basic" name="themeImage" accept="image/*" 
-                   [maxFileSize]="2000000" chooseLabel="Choisir une image"
-                   (onSelect)="onImageSelect($event)"></p-fileUpload>
+      <p-fileUpload mode="basic" name="themeImage" accept="image/*" [maxFileSize]="2000000"
+        chooseLabel="Choisir une image" (onSelect)="onImageSelect($event)"></p-fileUpload>
       <small class="p-help">Format accepté: JPG, PNG (max 2MB)</small>
     </div>
     <div class="form-group">
+      <label>Preview du thème *</label>
+      <p-fileUpload mode="basic" name="themePreviewPdf" accept="application/pdf" [maxFileSize]="2000000"
+        chooseLabel="Choisir un fichier PDF" (onSelect)="onPdfSelect($event)"></p-fileUpload>
+      <small class="p-help">Format accepté: PDF (max 2MB)</small>
+    </div>
+    <div class="form-group">
       <label>Statut</label>
-      <p-toggleButton [(ngModel)]="currentTheme.active" 
-                     onLabel="Actif" offLabel="Inactif"
-                     onIcon="pi pi-check" offIcon="pi pi-times"></p-toggleButton>
+      <p-toggleButton [(ngModel)]="currentTheme.active" onLabel="Actif" offLabel="Inactif" onIcon="pi pi-check"
+        offIcon="pi pi-times"></p-toggleButton>
     </div>
     <ng-template pTemplate="footer">
       <button pButton label="Annuler" class="p-button-text" (click)="hideDialog()"></button>
-      <button pButton label="Sauvegarder" class="p-button-raised" 
-             [loading]="loading" (click)="saveTheme()"></button>
+      <button pButton label="Sauvegarder" class="p-button-raised" [loading]="loading" (click)="saveTheme()"></button>
     </ng-template>
   </p-dialog>
 </div>

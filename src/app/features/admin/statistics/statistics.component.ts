@@ -50,7 +50,7 @@ export class StatisticsComponent implements OnInit {
       labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun'],
       datasets: [
         {
-          label: 'Revenus (€)',
+          label: 'Revenus (MAD)',
           data: [2400, 3200, 2800, 4100, 3800, 4500],
           fill: false,
           borderColor: '#3366FF',
@@ -75,6 +75,6 @@ export class StatisticsComponent implements OnInit {
   }
   
   goBack() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/dashboard']);
   }
 }

@@ -1,0 +1,49 @@
+<div class="builder-container">
+    <div class="container">
+        <!-- Actions en haut -->
+        <div class="builder-actions-top">
+            <button pButton label="Retour au Dashboard" icon="pi pi-arrow-left" class="p-button-outlined"
+                (click)="goBack()"></button>
+
+            <div class="portfolio-controls" *ngIf="currentPortfolio">
+                <!-- <div class="control-group">
+              <label>Statut:</label>
+              <p-dropdown 
+                [options]="statutOptions" 
+                [(ngModel)]="currentPortfolio.statut"
+                optionLabel="label" 
+                optionValue="value"
+                (onChange)="onStatusChange($event.value)"
+                [style]="{'min-width': '120px'}">
+              </p-dropdown>
+            </div> -->
+
+                <div class="control-group">
+                    <label>Visibilité:</label>
+                    <p-toggleButton [(ngModel)]="currentPortfolio.isPublic" onLabel="Public" offLabel="Privé"
+                        onIcon="pi pi-eye" offIcon="pi pi-eye-slash" (onChange)="onVisibilityChange()"
+                        styleClass="p-button-sm">
+                    </p-toggleButton>
+                </div>
+            </div>
+
+            <button pButton label="Aperçu du Portfolio" icon="pi pi-eye" class="p-button-raised"
+                (click)="previewPortfolio()"></button>
+        </div>
+
+        <div class="builder-header">
+            <h1>Constructeur de Portfolio</h1>
+            <p>Créez et personnalisez votre portfolio professionnel</p>
+        </div>
+
+        <div class="builder-navigation">
+          <p-tabMenu scrollable [model]="menuItems" [activeItem]="activeItem" (activeItemChange)="onTabChange($event)"></p-tabMenu>
+        </div>
+
+      
+
+        <div class="builder-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

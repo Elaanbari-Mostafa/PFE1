@@ -35,20 +35,20 @@ export class AuthService {
     return of({
       user: {
         id: '1',
-        nom: 'Doe',
-        prenom: 'John',
+        nom: 'EL AANBARI',
+        prenom: 'Mostafa',
         email: email,
-        nomUtilisateur: 'johndoe',
+        nomUtilisateur: 'elaabari',
         titreProf: 'Développeur Full Stack',
         adresse: 'Paris, France',
-        surNom: 'JD',
-        role: 'admin' as const,
+        surNom: '',
+        role: 'user' as const,
         abonnement: {
           id: '1',
           statut: 'actif' as const,
           planAbonnementId: 'gratuit',
           dateDebut: new Date(),
-          dateFin: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 jours
+          dateFin: new Date( Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 jours
           utilisateurId: '1'
         },
         createdAt: new Date(),

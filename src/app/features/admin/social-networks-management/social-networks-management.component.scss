@@ -64,3 +64,7 @@
   font-size: 1.1rem;
   color: var(--primary-color);
 }
+
+::ng-deep .p-dropdown {
+  height: 37px;
+}

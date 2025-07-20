@@ -67,7 +67,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   
   ngAfterViewInit() {
     // Initialiser PayPal après le rendu de la vue
-    this.initializePayPalButtons();
+    //this.initializePayPalButtons();
   }
   
   plans: PricingPlan[] = [

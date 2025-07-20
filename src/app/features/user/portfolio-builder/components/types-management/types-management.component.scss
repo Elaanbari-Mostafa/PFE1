@@ -1,0 +1,175 @@
+.types-management {
+  // padding: 1rem;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-header h2 {
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.section-header p {
+  color: var(--text-color-secondary);
+  margin: 0;
+}
+
+.tab-content {
+  padding: 1rem 0;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.tab-header h3 {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.type-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.type-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.type-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.type-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.type-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.type-card h4 {
+  margin: 0 0 1rem 0;
+  color: var(--text-color);
+  font-size: 1.2rem;
+}
+
+.type-stats {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 0.75rem;
+}
+
+.type-stats small {
+  color: var(--text-color-secondary);
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-color-secondary);
+}
+
+.empty-state h3 {
+  margin: 1rem 0 0.5rem 0;
+}
+
+.empty-state p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .tab-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .types-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Fix pour les classes des tabs PrimeNG */
+
+::ng-deep .p-tab {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 0 !important;
+  padding: 1rem 1.5rem !important;
+  color: #64748b !important;
+  font-weight: 500 !important;
+  font-family: inherit;
+  transition: all 0.3s ease !important;
+  margin-right: 0 !important;
+}
+
+::ng-deep .p-tab:hover {
+  background: rgba(79, 70, 229, 0.05) !important;
+  color: #4f46e5 !important;
+}
+
+::ng-deep .p-tab.p-tab-active {
+  background: rgba(79, 70, 229, 0.05) !important;
+  color: #4f46e5 !important;
+  border-bottom-color: #4f46e5 !important;
+}
+
+::ng-deep .p-tab.p-tab-active:hover {
+  background: rgba(79, 70, 229, 0.1) !important;
+}
+
+::ng-deep .p-tab:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}

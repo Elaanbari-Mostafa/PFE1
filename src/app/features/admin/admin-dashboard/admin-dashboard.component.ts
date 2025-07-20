@@ -50,21 +50,21 @@ export class AdminDashboardComponent implements OnInit {
       type: 'user_registration',
       description: 'Nouvel utilisateur inscrit',
       timestamp: new Date(),
-      user: 'Marie Dubois'
+      user: 'SALMA CHLILI'
     },
     {
       id: '2',
       type: 'subscription_created',
       description: 'Abonnement mensuel souscrit',
       timestamp: new Date(Date.now() - 3600000),
-      user: 'Thomas Martin'
+      user: 'AHMAD MOHAMED'
     },
     {
       id: '3',
-      type: 'portfolio_created',
-      description: 'Nouveau portfolio créé',
+      type: 'subscription_created',
+      description: 'Abonnement annuel souscrit',
       timestamp: new Date(Date.now() - 7200000),
-      user: 'Sophie Laurent'
+      user: 'E LAANBARI MOSTAFA'
     }
   ];
 
@@ -79,12 +79,12 @@ export class AdminDashboardComponent implements OnInit {
 
   initializeChartData() {
     this.revenueChartData = {
-      labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun'],
+      labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
       datasets: [
         {
-          label: 'Revenus (€)',
-          data: [2400, 3200, 2800, 4100, 3800, 4500],
-          fill: false,
+          label: 'Revenus (MAD)',
+          data: [40, 50, 100, 240, 500, 1000,2500],
+          fill: true,
           borderColor: 'var(--primary-color)',
           tension: 0.4
         }

@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const adminRoutes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent)
   },
   {
@@ -24,5 +24,9 @@ export const adminRoutes: Routes = [
   {
     path: 'social-networks',
     loadComponent: () => import('./social-networks-management/social-networks-management.component').then(m => m.SocialNetworksManagementComponent)
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard'
   }
 ];

@@ -1,0 +1,77 @@
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+
+.icon-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-option i {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.reseau-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reseau-info i {
+  font-size: 1.2rem;
+}
+
+.reseau-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.reseau-link:hover {
+  text-decoration: underline;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+::ng-deep .p-select {
+  min-width: 235px;
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  position: relative;
+  padding-bottom: 70px !important; /* Espace pour les boutons */
+}
+
+.dialog-actions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  gap: 10px;
+  padding: 15px 20px;
+}

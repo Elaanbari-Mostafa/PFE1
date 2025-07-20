@@ -51,45 +51,45 @@ export class UserManagementComponent implements OnInit {
     this.users = [
       {
         id: '1',
-        nom: 'Dubois',
-        prenom: 'Marie',
-        email: 'marie.dubois@email.com',
-        nomUtilisateur: 'mariedubois',
+        nom: 'ELAANBARI',
+        prenom: 'Mostafa',
+        email: 'm.elaanbari@email.com',
+        nomUtilisateur: 'elaanbari',
         titreProf: 'Designer UX/UI',
-        adresse: 'Paris, France',
-        surNom: 'Marie',
+        adresse: 'casablanca, maroc',
+        surNom: '',
         role: 'user',
         abonnement: {
           id: '1',
           statut: 'actif',
           planAbonnementId: 'mensuel',
-          dateDebut: new Date('2024-01-01'),
-          dateFin: new Date('2024-02-01'),
+          dateDebut: new Date('2025-05-01'),
+          dateFin: new Date('2025-06-01'),
           utilisateurId: '1'
         },
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-15')
+        createdAt: new Date('2025-05-01'),
+        updatedAt: new Date('2025-05-15')
       },
       {
         id: '2',
-        nom: 'Martin',
-        prenom: 'Thomas',
-        email: 'thomas.martin@email.com',
-        nomUtilisateur: 'thomasmartin',
+        nom: 'mohammed',
+        prenom: 'salan',
+        email: 's.mohammed@email.com',
+        nomUtilisateur: 'salan',
         titreProf: 'Développeur Full Stack',
         adresse: 'Lyon, France',
-        surNom: 'Tom',
+        surNom: '',
         role: 'user',
         abonnement: {
           id: '2',
           statut: 'actif',
           planAbonnementId: 'annuel',
-          dateDebut: new Date('2024-01-15'),
-          dateFin: new Date('2025-01-15'),
+          dateDebut: new Date('2025-05-15'),
+          dateFin: new Date('2026-05-16'),
           utilisateurId: '2'
         },
-        createdAt: new Date('2024-01-15'),
-        updatedAt: new Date('2024-01-20')
+        createdAt: new Date('2025-05-15'),
+        updatedAt: new Date('2025-05-15')
       }
     ];
     this.filteredUsers = [...this.users];
@@ -193,6 +193,6 @@ export class UserManagementComponent implements OnInit {
   }
   
   goBack() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/dashboard']);
   }
 }

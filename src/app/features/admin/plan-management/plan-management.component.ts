@@ -15,13 +15,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TextareaModule } from 'primeng/textarea';
 import { SubscriptionService } from '../../../core/services/subscription.service';
 import { PlanAbonnement, AvantageAbonnement } from '../../../core/models/user.model';
-
+import { ToggleButtonModule } from 'primeng/togglebutton';
 @Component({
   selector: 'app-plan-management',
   imports: [
     CommonModule, ReactiveFormsModule, FormsModule, ButtonModule, CardModule, TableModule,
     TagModule, DialogModule, InputTextModule, InputNumberModule, 
-    ConfirmDialogModule, TextareaModule
+    ConfirmDialogModule, TextareaModule,ToggleButtonModule
   ],
   templateUrl: './plan-management.component.html',
   styleUrls: ['./plan-management.component.scss']
@@ -151,6 +151,6 @@ export class PlanManagementComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/dashboard']);
   }
 }

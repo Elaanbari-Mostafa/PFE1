@@ -108,9 +108,6 @@ export class SelectSubscriptionComponent implements OnInit, AfterViewInit {
     private subscriptionService: SubscriptionService,
     private messageService: MessageService
   ) {
-      setTimeout(() => {
-      console.log("qwqw");
-    }, 500);
    }
 
   ngOnInit() {
@@ -138,7 +135,24 @@ export class SelectSubscriptionComponent implements OnInit, AfterViewInit {
             this.paymentService.createPayPalButton(
               containerId,
               plan.price.toString(),
-              plan.name
+              plan.name,
+              () => {
+                this.messageService.add({
+                  severity: 'success',
+                  summary: 'Paiement réussi',
+                  detail: `Votre abonnement au plan ${plan.name} a été activé !`
+                });
+                // Rediriger vers la page d'accueil/dashboard
+                this.router.navigate(['/auth/login']);
+              },
+              (error: any) => {
+                this.messageService.add({
+                  severity: 'error',
+                  summary: 'Erreur de paiement',
+                  detail: `Une erreur est survenue lors du paiement pour le plan ${plan.name}. Veuillez réessayer.`
+                });
+                console.error(`Erreur PayPal pour ${plan.name}:`, error);
+              }
             ).then(() => {
               console.log(`Bouton PayPal créé pour ${plan.name}`);
             }).catch(error => {
@@ -179,7 +193,7 @@ export class SelectSubscriptionComponent implements OnInit, AfterViewInit {
 
         // Rediriger vers la page d'accueil/dashboard
         setTimeout(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/auth/login']);
         }, 2000);
       },
       error: () => {

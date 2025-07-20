@@ -7,7 +7,7 @@ import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { FileUploadModule } from 'primeng/fileupload';
+import { FileSelectEvent, FileUploadModule } from 'primeng/fileupload';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -39,6 +39,7 @@ interface ThemeInfo {
   styleUrls: ['./theme-management.component.scss']
 })
 export class AdminThemeManagementComponent implements OnInit {
+
   themes: ThemeInfo[] = [];
   showDialog = false;
   currentTheme: any = {};
@@ -47,7 +48,7 @@ export class AdminThemeManagementComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadThemes();
@@ -57,19 +58,23 @@ export class AdminThemeManagementComponent implements OnInit {
     this.themes = [
       {
         id: '1',
-        nom: 'Modern Pro',
+        nom: 'Horizon moderne',
         active: true,
         image: '../../../assets/images/temp1.png',
         usageCount: 245
       },
       {
         id: '2',
-        nom: 'Creative Studio',
+        nom: 'Barre latérale créative',
         active: true,
         image: '../../../assets/images/temp2.png',
         usageCount: 156
       }
     ];
+  }
+
+  showTheme(theme: ThemeInfo) {
+
   }
 
   showAddDialog() {
@@ -125,8 +130,15 @@ export class AdminThemeManagementComponent implements OnInit {
       // TODO: Implémenter l'upload d'image
     }
   }
-  
+
+  onPdfSelect($event: FileSelectEvent) {
+    const file = $event.files[0];
+    if (file) {
+      console.log('PDF sélectionné:', file);
+    }
+  }
+
   goBack() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/dashboard']);
   }
 }

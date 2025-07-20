@@ -8,7 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService, LoginResponse } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +29,7 @@ import { AuthService } from '../../../core/services/auth.service';
 export class LoginComponent {
   loginForm: FormGroup;
   loading = false;
-  
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -42,20 +42,24 @@ export class LoginComponent {
       rememberMe: [false]
     });
   }
-  
+
   onSubmit() {
     if (this.loginForm.valid) {
       this.loading = true;
       const { email, password, rememberMe } = this.loginForm.value;
-      
+
       this.authService.login(email, password, rememberMe).subscribe({
-        next: (response) => {
+        next: (response: LoginResponse) => {
           this.messageService.add({
             severity: 'success',
             summary: 'Connexion réussie',
             detail: 'Bienvenue sur QuickFolio !'
           });
-          this.router.navigate(['/dashboard']);
+          if (this.authService.isAdmin()) {
+            this.router.navigate(['/admin/dashboard']);
+          } else {
+            this.router.navigate(['/dashboard']);
+          }
         },
         error: (error) => {
           this.messageService.add({
@@ -70,18 +74,18 @@ export class LoginComponent {
       this.markFormGroupTouched();
     }
   }
-  
+
   private markFormGroupTouched() {
     Object.keys(this.loginForm.controls).forEach(key => {
       const control = this.loginForm.get(key);
       control?.markAsTouched();
     });
   }
-  
+
   navigateToRegister() {
     this.router.navigate(['/auth/register']);
   }
-  
+
   // Helper methods for form validation
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }

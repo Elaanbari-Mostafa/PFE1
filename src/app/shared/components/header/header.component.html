@@ -18,7 +18,7 @@
       <!-- Admin Menu -->
       <nav class="desktop-menu" *ngIf="authService.isAuthenticated() && authService.isAdmin()">
         <ul>
-          <li><a (click)="router.navigate(['/admin'])"><i class="pi pi-cog"></i> Administration</a></li>
+          <li><a (click)="router.navigate(['/admin/dashboard'])"><i class="pi pi-cog"></i> Administration</a></li>
           <!-- <li><a (click)="router.navigate(['/dashboard'])"><i class="pi pi-user"></i> Dashboard</a></li> -->
         </ul>
       </nav>
@@ -45,12 +45,13 @@
 
       <!-- User Menu -->
       <div class="user-menu" *ngIf="authService.isAuthenticated()">
-        <div *ngIf="!authService.isAdmin() && authService.hasActiveSubscription()" class="subscription-info">
+        <div *ngIf="!authService.isAdmin() && authService.hasActiveSubscription()"
+          class="subscription-info {{ authService.getSubscriptionDaysLeft() <= 3 ? 'subscription-info-red' : 'subscription-info-green' }}">
           <span class="days-left">{{ authService.getSubscriptionDaysLeft() }} jours restants</span>
         </div>
         <button pButton [label]="authService.isAdmin() ? 'Admin' : 'Dashboard'"
           [icon]="authService.isAdmin() ? 'pi pi-cog' : 'pi pi-user'" class="p-button-outlined"
-          (click)="authService.isAdmin() ? router.navigate(['/admin']) : navigateToDashboard()"></button>
+          (click)="authService.isAdmin() ? router.navigate(['/admin/dashboard']) : navigateToDashboard()"></button>
         <button pButton icon="pi pi-sign-out" class="p-button-text" (click)="logout()" pTooltip="Déconnexion"></button>
       </div>
     </div>
@@ -72,7 +73,7 @@
         <a (click)="navigateToRegister()"><i class="pi pi-user-plus"></i> S'inscrire</a>
       </li>
       <li *ngIf="authService.isAuthenticated() && authService.isAdmin()">
-        <a (click)="router.navigate(['/admin'])"><i class="pi pi-cog"></i> Administration</a>
+        <a (click)="router.navigate(['/admin/dashboard'])"><i class="pi pi-cog"></i> Administration</a>
       </li>
       <li *ngIf="authService.isAuthenticated() && !authService.isAdmin()">
         <a (click)="navigateToDashboard()"><i class="pi pi-user"></i> Dashboard</a>

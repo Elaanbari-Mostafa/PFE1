@@ -26,7 +26,7 @@
         <ng-template pTemplate="body" let-plan>
             <tr>
                 <td>{{ plan.nom }}</td>
-                <td>{{ plan.prix }}€</td>
+                <td>{{ plan.prix }} MAD</td>
                 <td>{{ plan.dureeEnJours }} jours</td>
                 <td>
                     <p-tag [value]="plan.popular ? 'Oui' : 'Non'" 
@@ -57,8 +57,8 @@
                     <input pInputText id="nom" formControlName="nom" />
                 </div>
                 <div class="form-group">
-                    <label for="prix">Prix (€) *</label>
-                    <p-inputNumber id="prix" formControlName="prix" mode="currency" currency="EUR"
+                    <label for="prix">Prix (MAD) *</label>
+                    <p-inputNumber id="prix" formControlName="prix" mode="currency" currency="MAD"
                         locale="fr-FR"></p-inputNumber>
                 </div>
                 <div class="form-group">
@@ -102,7 +102,7 @@
             </div>
             <div class="detail-item">
                 <label>Prix:</label>
-                <span>{{ selectedPlan.prix }}€</span>
+                <span>{{ selectedPlan.prix }} MAD</span>
             </div>
             <div class="detail-item">
                 <label>Durée:</label>

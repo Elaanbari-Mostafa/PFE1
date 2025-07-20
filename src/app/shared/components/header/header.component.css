@@ -88,12 +88,19 @@
 }
 
 .subscription-info {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+.subscription-info-red {
+  background: linear-gradient(135deg, var(--warning-color), var(--accent-color));
+}
+
+.subscription-info-green {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 }
 
 .mobile-menu-toggle {
@@ -152,14 +159,17 @@
 }
 
 @media (max-width: 768px) {
-  .desktop-menu, .auth-buttons, .user-menu {
+
+  .desktop-menu,
+  .auth-buttons,
+  .user-menu {
     display: none;
   }
-  
+
   .mobile-menu-toggle {
     display: block;
   }
-  
+
   .header-content {
     padding: 0 1rem;
   }

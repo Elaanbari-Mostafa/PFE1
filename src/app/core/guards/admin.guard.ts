@@ -6,14 +6,14 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-  
+
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
-  
+  ) { }
+
   canActivate(): boolean {
-    if (this.authService.isAuthenticated() && this.authService.isAdmin()) {
+    if (this.authService.isAdmin()) {
       return true;
     } else {
       this.router.navigate(['/dashboard']);

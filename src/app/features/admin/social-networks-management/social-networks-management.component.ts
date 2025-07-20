@@ -39,23 +39,48 @@ export class SocialNetworksManagementComponent implements OnInit {
   showDialog = false;
   currentNetwork: any = {};
   loading = false;
-  
+
   iconesDisponibles = [
     { label: 'LinkedIn', value: 'pi pi-linkedin' },
     { label: 'GitHub', value: 'pi pi-github' },
     { label: 'Twitter', value: 'pi pi-twitter' },
     { label: 'Instagram', value: 'pi pi-instagram' },
     { label: 'Facebook', value: 'pi pi-facebook' },
-    { label: 'YouTube', value: 'pi pi-video' },
+    { label: 'YouTube', value: 'pi pi-youtube' },
+    { label: 'TikTok', value: 'pi pi-tiktok' },
+    { label: 'WhatsApp', value: 'pi pi-whatsapp' },
+    { label: 'Telegram', value: 'pi pi-send' },
+    { label: 'Discord', value: 'pi pi-discord' },
+    { label: 'Slack', value: 'pi pi-slack' },
+    { label: 'Snapchat', value: 'pi pi-camera' },
+    { label: 'Pinterest', value: 'pi pi-bookmark' },
+    { label: 'Reddit', value: 'pi pi-reddit' },
+    { label: 'Twitch', value: 'pi pi-twitch' },
     { label: 'Behance', value: 'pi pi-palette' },
-    { label: 'Dribbble', value: 'pi pi-circle' }
+    { label: 'Dribbble', value: 'pi pi-circle' },
+    { label: 'Medium', value: 'pi pi-book' },
+    { label: 'Vimeo', value: 'pi pi-video' },
+    { label: 'Skype', value: 'pi pi-phone' },
+    { label: 'Zoom', value: 'pi pi-video' },
+    { label: 'Website', value: 'pi pi-globe' },
+    { label: 'Email', value: 'pi pi-envelope' },
+    { label: 'Blog', value: 'pi pi-file-edit' },
+    { label: 'Portfolio', value: 'pi pi-briefcase' },
+    { label: 'Apple', value: 'pi pi-apple' },
+    { label: 'Google', value: 'pi pi-google' },
+    { label: 'Microsoft', value: 'pi pi-microsoft' },
+    { label: 'Autre', value: 'pi pi-link' },
+    { label: 'TikTok', value: 'pi pi-play' },
+    { label: 'Discord', value: 'pi pi-comments' },
+    { label: 'Reddit', value: 'pi pi-comment' },
+    { label: 'Twitch', value: 'pi pi-video' }
   ];
 
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadSocialNetworks();
@@ -139,8 +164,8 @@ export class SocialNetworksManagementComponent implements OnInit {
       }
     });
   }
-  
+
   goBack() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/dashboard']);
   }
 }
