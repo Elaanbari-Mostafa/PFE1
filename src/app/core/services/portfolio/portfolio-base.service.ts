@@ -56,3 +56,5 @@ export abstract class PortfolioBaseService<T> {
     );
   }
 }
+
+export { PortfolioBaseService }
