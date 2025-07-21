@@ -39,7 +39,7 @@ export class PaymentService {
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: amount,
+              value: Number(amount) / 10,// convert to derhams
               currency_code: 'USD'
             },
             description: `Abonnement ${planName}`

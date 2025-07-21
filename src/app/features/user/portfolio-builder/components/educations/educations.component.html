@@ -34,7 +34,7 @@
 </p-table>
 
 <p-dialog header="{{editMode ? 'Modifier' : 'Ajouter'}} une formation" 
-         [(visible)]="displayDialog" [modal]="true" [style]="{width: '600px'}">
+         [(visible)]="displayDialog" [modal]="true" [style]="{width: '650px',height: '650px'}">
   <form [formGroup]="educationForm" (ngSubmit)="saveEducation()">
     <div class="form-grid">
       <div class="form-group">

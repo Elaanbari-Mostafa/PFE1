@@ -62,7 +62,7 @@ export class CompetencesComponent implements OnInit {
       this.niveauValue = value;
     });
   }
-  
+
   ngOnInit() {
     this.loadCompetences();
     this.loadTypesCompetences();

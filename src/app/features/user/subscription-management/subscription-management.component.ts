@@ -172,8 +172,8 @@ export class SubscriptionManagementComponent implements OnInit {
         {
           id: '2',
           planNom: 'Essai Gratuit',
-          dateDebut: new Date('2025-07-19'),
-          dateFin: new Date('2025-07-22'),
+         dateDebut: new Date(),
+          dateFin: new Date( Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 jours
           statut: 'actif',
           montant: 0,
           methodePaiement: 'Gratuit'
