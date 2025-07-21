@@ -25,36 +25,13 @@
 }
 
 .profile-content {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-}
-
-.account-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-.info-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.info-item label {
-  font-weight: 600;
-  color: var(--text-color-secondary);
-  font-size: 0.9rem;
-}
-
-.info-item span {
-  color: var(--text-color);
-  font-size: 1rem;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -63,6 +40,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
 }
 
 .form-group label {
@@ -75,6 +56,22 @@
   justify-content: flex-end;
 }
 
+.account-management {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.warning-zone {
+  border: 2px solid var(--orange-200);
+}
+
+.warning-zone :deep(.p-card-header) {
+  background-color: var(--orange-50);
+  color: var(--orange-800);
+  border-bottom: 1px solid var(--orange-200);
+}
+
 .danger-zone {
   border: 2px solid var(--red-200);
 }
@@ -85,22 +82,54 @@
   border-bottom: 1px solid var(--red-200);
 }
 
-.danger-content {
+.action-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 2rem;
 }
 
-.danger-info h4 {
-  margin: 0 0 0.5rem 0;
-  color: var(--red-800);
+.action-info {
+  flex: 1;
 }
 
-.danger-info p {
-  margin: 0;
-  color: var(--red-600);
+.action-info h4 {
+  margin: 0 0 0.5rem 0;
+  color: inherit;
+}
+
+.action-info p {
+  margin: 0 0 1rem 0;
   line-height: 1.5;
+}
+
+.consequences-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  color: var(--text-color-secondary);
+}
+
+.consequences-list li {
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+::ng-deep .p-tabview {
+  .p-tabview-nav {
+    background: white;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .p-tabview-panels {
+    background: transparent;
+    padding: 0;
+  }
+  
+  .p-tabview-panel {
+    padding: 2rem 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -114,11 +143,15 @@
     text-align: center;
   }
   
-  .account-info {
+  .form-grid {
     grid-template-columns: 1fr;
   }
   
-  .danger-content {
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+  
+  .action-content {
     flex-direction: column;
     text-align: center;
   }
