@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PortfolioBaseService } from './portfolio-base.service';
 import { InformationPersonnelle } from '../../models/portfolio.model';
 

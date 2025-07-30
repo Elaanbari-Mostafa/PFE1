@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PortfolioBaseService } from './portfolio-base.service';
 import { TypeCompetence, TypeProjet } from '../../models/portfolio.model';
 
@@ -26,7 +27,7 @@ export class TypesService extends PortfolioBaseService<TypeCompetence | TypeProj
     };
     return this.simulateApiCall(newType).pipe(
       map(result => {
-        this.typesCompetences.update(items => [...items, result]);
+        this.typesCompetences.update((items: TypeCompetence[]) => [...items, result]);
         return result;
       })
     );
@@ -35,10 +36,10 @@ export class TypesService extends PortfolioBaseService<TypeCompetence | TypeProj
   updateTypeCompetence(id: string, data: Partial<TypeCompetence>): Observable<TypeCompetence> {
     return this.simulateApiCall(data as TypeCompetence).pipe(
       map(result => {
-        this.typesCompetences.update(items => 
+        this.typesCompetences.update((items: TypeCompetence[]) => 
           items.map(item => item.id === id ? { ...item, ...result } : item)
         );
-        return this.typesCompetences().find(t => t.id === id)!;
+        return this.typesCompetences().find((t: TypeCompetence) => t.id === id)!;
       })
     );
   }
@@ -46,7 +47,7 @@ export class TypesService extends PortfolioBaseService<TypeCompetence | TypeProj
   deleteTypeCompetence(id: string): Observable<boolean> {
     return this.simulateApiCall(true).pipe(
       map(() => {
-        this.typesCompetences.update(items => items.filter(item => item.id !== id));
+        this.typesCompetences.update((items: TypeCompetence[]) => items.filter(item => item.id !== id));
         return true;
       })
     );
@@ -64,7 +65,7 @@ export class TypesService extends PortfolioBaseService<TypeCompetence | TypeProj
     };
     return this.simulateApiCall(newType).pipe(
       map(result => {
-        this.typesProjets.update(items => [...items, result]);
+        this.typesProjets.update((items: TypeProjet[]) => [...items, result]);
         return result;
       })
     );
@@ -73,10 +74,10 @@ export class TypesService extends PortfolioBaseService<TypeCompetence | TypeProj
   updateTypeProjet(id: string, data: Partial<TypeProjet>): Observable<TypeProjet> {
     return this.simulateApiCall(data as TypeProjet).pipe(
       map(result => {
-        this.typesProjets.update(items => 
+        this.typesProjets.update((items: TypeProjet[]) => 
           items.map(item => item.id === id ? { ...item, ...result } : item)
         );
-        return this.typesProjets().find(t => t.id === id)!;
+        return this.typesProjets().find((t: TypeProjet) => t.id === id)!;
       })
     );
   }
@@ -84,7 +85,7 @@ export class TypesService extends PortfolioBaseService<TypeCompetence | TypeProj
   deleteTypeProjet(id: string): Observable<boolean> {
     return this.simulateApiCall(true).pipe(
       map(() => {
-        this.typesProjets.update(items => items.filter(item => item.id !== id));
+        this.typesProjets.update((items: TypeProjet[]) => items.filter(item => item.id !== id));
         return true;
       })
     );
