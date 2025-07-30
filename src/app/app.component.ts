@@ -17,46 +17,23 @@ import { ToastModule } from 'primeng/toast';
     ScrollTopModule,
     ToastModule
   ],
-  template: `
-    <div class="app-container">
-      <app-header></app-header>
-      
-      <main>
-        <router-outlet></router-outlet>
-      </main>
-      
-      <app-footer></app-footer>
-      
-      <p-scrollTop></p-scrollTop>
-      <p-toast></p-toast>
-    </div>
-  `,
-  styles: [`
-    .app-container {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    main {
-      flex: 1;
-    }
-  `]
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   title = 'QuickFolio';
-  
+
   ngOnInit() {
     this.setupScrollAnimation();
   }
-  
+
   setupScrollAnimation() {
     const observerOptions = {
       root: null,
       rootMargin: '0px',
       threshold: 0.1
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -65,7 +42,7 @@ export class AppComponent implements OnInit {
         }
       });
     }, observerOptions);
-    
+
     setTimeout(() => {
       const elements = document.querySelectorAll('.animate-on-scroll');
       elements.forEach(element => {

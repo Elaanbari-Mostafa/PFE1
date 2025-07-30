@@ -3,8 +3,7 @@
     <h2>Services</h2>
     <p style="margin-top: -1.5rem ;">Présentez les services que vous proposez</p>
   </div>
-  <button pButton label="Ajouter un service" icon="pi pi-plus" 
-         class="p-button-raised" (click)="showDialog()"></button>
+  <button pButton label="Ajouter un service" icon="pi pi-plus" class="p-button-raised" (click)="showDialog()"></button>
 </div>
 
 <p-table [value]="services" styleClass="p-datatable-striped">
@@ -25,29 +24,26 @@
       </td>
       <td>{{ truncateText(service.description, 80) }}</td>
       <td>
-        <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" 
-               (click)="editService(service)"></button>
-        <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" 
-               (click)="deleteService(service)"></button>
+        <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" (click)="editService(service)"></button>
+        <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger"
+          (click)="deleteService(service)"></button>
       </td>
     </tr>
   </ng-template>
 </p-table>
 
-<p-dialog header="{{editMode ? 'Modifier' : 'Ajouter'}} un service" 
-         [(visible)]="displayDialog" [modal]="true" [style]="{width: '600px'}">
+<p-dialog header="{{editMode ? 'Modifier' : 'Ajouter'}} un service" [(visible)]="displayDialog" [modal]="true"
+  [style]="{width: '600px'}">
   <form [formGroup]="serviceForm" (ngSubmit)="saveService()">
     <div class="form-grid">
-      <div class="form-group full-width">
+      <div class="form-group ">
         <label for="nom">Nom du service *</label>
-        <input pInputText id="nom" formControlName="nom" 
-               placeholder="Ex: Développement d'application web" />
+        <input pInputText id="nom" formControlName="nom" placeholder="Ex: Développement d'application web" />
       </div>
-      <div class="form-group full-width">
+      <div class="form-group ">
         <label for="icone">Icône *</label>
-        <p-dropdown id="icone" formControlName="icone" 
-                   [options]="iconesDisponibles" optionLabel="label" optionValue="value"
-                   placeholder="Sélectionner une icône">
+        <p-dropdown id="icone" formControlName="icone" [options]="iconesDisponibles" optionLabel="label"
+          optionValue="value" placeholder="Sélectionner une icône">
           <ng-template pTemplate="selectedItem" let-selectedOption>
             <div class="icon-option" *ngIf="selectedOption">
               <i [class]="selectedOption.value"></i>
@@ -64,14 +60,14 @@
       </div>
       <div class="form-group full-width">
         <label for="description">Description *</label>
-        <textarea pInputTextarea id="description" formControlName="description" 
-                 rows="4" placeholder="Décrivez votre service en détail..."></textarea>
+        <textarea pInputTextarea id="description" formControlName="description" rows="4" cols="53"
+          placeholder="Décrivez votre service en détail..."></textarea>
       </div>
     </div>
     <div class="dialog-actions">
       <button pButton type="button" label="Annuler" class="p-button-text" (click)="hideDialog()"></button>
-      <button pButton type="submit" label="Sauvegarder" class="p-button-raised" 
-             [loading]="loading" [disabled]="serviceForm.invalid"></button>
+      <button pButton type="submit" label="Sauvegarder" class="p-button-raised" [loading]="loading"
+        [disabled]="serviceForm.invalid"></button>
     </div>
   </form>
 </p-dialog>
