@@ -109,7 +109,7 @@ export class ServicesComponent implements OnInit {
     this.serviceForm = this.fb.group({
       nom: ['', Validators.required],
       description: ['', Validators.required],
-      icone: ['pi pi-cog', Validators.required]
+      icone: ['', Validators.required]
     });
   }
   
@@ -125,7 +125,7 @@ export class ServicesComponent implements OnInit {
     this.editMode = false;
     this.currentService = null;
     this.serviceForm.reset();
-    this.serviceForm.patchValue({ icone: 'pi pi-cog' });
+    // this.serviceForm.patchValue({ icone: 'pi pi-cog' });
     this.displayDialog = true;
   }
   
