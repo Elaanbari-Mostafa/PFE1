@@ -123,42 +123,44 @@ export class ProfileManagementComponent implements OnInit {
   
   onDeactivateAccount() {
     this.confirmationService.confirm({
-      message: 'Êtes-vous sûr de vouloir désactiver votre compte ? Votre compte sera suspendu pendant 30 jours, après quoi vous pourrez le réactiver en vous reconnectant.',
+      message: 'Êtes-vous sûr de vouloir désactiver votre compte ? Cette action est irréversible.',
       header: 'Désactiver le compte',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Oui, désactiver',
       rejectLabel: 'Annuler',
-      acceptButtonStyleClass: 'p-button-warning',
+      acceptButtonStyleClass: 'p-button-danger',
       accept: () => {
         this.deactivateAccount();
       }
     });
   }
   
-  onDeleteAccount() {
-    this.confirmationService.confirm({
-      message: 'ATTENTION : Cette action est irréversible ! Toutes vos données (portfolio, projets, abonnement) seront définitivement supprimées. Êtes-vous absolument sûr ?',
-      header: 'Supprimer définitivement le compte',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Oui, supprimer définitivement',
-      rejectLabel: 'Annuler',
-      acceptButtonStyleClass: 'p-button-danger',
-      accept: () => {
-        this.deleteAccount();
-      }
-    });
-  }
+  // onDeleteAccount() {
+  //   this.confirmationService.confirm({
+  //     message: 'ATTENTION : Cette action est irréversible ! Toutes vos données (portfolio, projets, abonnement) seront définitivement supprimées. Êtes-vous absolument sûr ?',
+  //     header: 'Supprimer définitivement le compte',
+  //     icon: 'pi pi-exclamation-triangle',
+  //     acceptLabel: 'Oui, supprimer définitivement',
+  //     rejectLabel: 'Annuler',
+  //     acceptButtonStyleClass: 'p-button-danger',
+  //     accept: () => {
+  //       this.deleteAccount();
+  //     }
+  //   });
+  // }
   
   private deactivateAccount() {
     this.loading = true;
     
+    // Simulation de désactivation de compte
     setTimeout(() => {
       this.messageService.add({
         severity: 'success',
         summary: 'Compte désactivé',
-        detail: 'Votre compte a été désactivé. Vous pouvez le réactiver dans les 30 jours en vous reconnectant.'
+        detail: 'Votre compte a été désactivé avec succès'
       });
       
+      // Déconnexion et redirection
       setTimeout(() => {
         this.authService.logout();
         this.router.navigate(['/']);
@@ -166,22 +168,22 @@ export class ProfileManagementComponent implements OnInit {
     }, 1000);
   }
   
-  private deleteAccount() {
-    this.loading = true;
+  // private deleteAccount() {
+  //   this.loading = true;
     
-    setTimeout(() => {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Compte supprimé',
-        detail: 'Votre compte et toutes vos données ont été définitivement supprimés.'
-      });
+  //   setTimeout(() => {
+  //     this.messageService.add({
+  //       severity: 'success',
+  //       summary: 'Compte supprimé',
+  //       detail: 'Votre compte et toutes vos données ont été définitivement supprimés.'
+  //     });
       
-      setTimeout(() => {
-        this.authService.logout();
-        this.router.navigate(['/']);
-      }, 2000);
-    }, 1000);
-  }
+  //     setTimeout(() => {
+  //       this.authService.logout();
+  //       this.router.navigate(['/']);
+  //     }, 2000);
+  //   }, 1000);
+  // }
   
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(key => {
