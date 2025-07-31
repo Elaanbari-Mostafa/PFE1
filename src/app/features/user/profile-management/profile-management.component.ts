@@ -12,6 +12,8 @@ import { DividerModule } from 'primeng/divider';
 import { TabViewModule } from 'primeng/tabview';
 import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../../../core/models/user.model';
+import { TabsModule } from 'primeng/tabs';
+import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile-management',
@@ -21,11 +23,12 @@ import { User } from '../../../core/models/user.model';
     ReactiveFormsModule,
     ButtonModule,
     CardModule,
+    TabsModule,
     InputTextModule,
     PasswordModule,
     ConfirmDialogModule,
     DividerModule,
-    TabViewModule
+    // TabViewModule
   ],
   templateUrl: './profile-management.component.html',
   styleUrls: ['./profile-management.component.scss']
@@ -35,8 +38,8 @@ export class ProfileManagementComponent implements OnInit {
   profileForm: FormGroup;
   currentUser: User | null = null;
   loading = false;
-  activeIndex = 0;
-  
+  // activeIndex = 0;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -49,7 +52,7 @@ export class ProfileManagementComponent implements OnInit {
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     }, { validators: this.passwordMatchValidator });
-    
+
     this.profileForm = this.fb.group({
       nom: ['', [Validators.required]],
       prenom: ['', [Validators.required]],
@@ -59,7 +62,12 @@ export class ProfileManagementComponent implements OnInit {
       adresse: ['', [Validators.required]]
     });
   }
-  
+
+
+
+
+
+
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
     if (this.currentUser) {
@@ -73,23 +81,23 @@ export class ProfileManagementComponent implements OnInit {
       });
     }
   }
-  
+
   passwordMatchValidator(form: FormGroup) {
     const newPassword = form.get('newPassword');
     const confirmPassword = form.get('confirmPassword');
-    
+
     if (newPassword && confirmPassword && newPassword.value !== confirmPassword.value) {
       confirmPassword.setErrors({ passwordMismatch: true });
       return { passwordMismatch: true };
     }
-    
+
     return null;
   }
-  
+
   onUpdateProfile() {
     if (this.profileForm.valid) {
       this.loading = true;
-      
+
       setTimeout(() => {
         this.messageService.add({
           severity: 'success',
@@ -102,11 +110,11 @@ export class ProfileManagementComponent implements OnInit {
       this.markFormGroupTouched(this.profileForm);
     }
   }
-  
+
   onChangePassword() {
     if (this.passwordForm.valid) {
       this.loading = true;
-      
+
       setTimeout(() => {
         this.messageService.add({
           severity: 'success',
@@ -120,7 +128,7 @@ export class ProfileManagementComponent implements OnInit {
       this.markFormGroupTouched(this.passwordForm);
     }
   }
-  
+
   onDeactivateAccount() {
     this.confirmationService.confirm({
       message: 'Êtes-vous sûr de vouloir désactiver votre compte ? Cette action est irréversible.',
@@ -134,7 +142,7 @@ export class ProfileManagementComponent implements OnInit {
       }
     });
   }
-  
+
   // onDeleteAccount() {
   //   this.confirmationService.confirm({
   //     message: 'ATTENTION : Cette action est irréversible ! Toutes vos données (portfolio, projets, abonnement) seront définitivement supprimées. Êtes-vous absolument sûr ?',
@@ -148,10 +156,10 @@ export class ProfileManagementComponent implements OnInit {
   //     }
   //   });
   // }
-  
+
   private deactivateAccount() {
     this.loading = true;
-    
+
     // Simulation de désactivation de compte
     setTimeout(() => {
       this.messageService.add({
@@ -159,7 +167,7 @@ export class ProfileManagementComponent implements OnInit {
         summary: 'Compte désactivé',
         detail: 'Votre compte a été désactivé avec succès'
       });
-      
+
       // Déconnexion et redirection
       setTimeout(() => {
         this.authService.logout();
@@ -167,35 +175,35 @@ export class ProfileManagementComponent implements OnInit {
       }, 2000);
     }, 1000);
   }
-  
+
   // private deleteAccount() {
   //   this.loading = true;
-    
+
   //   setTimeout(() => {
   //     this.messageService.add({
   //       severity: 'success',
   //       summary: 'Compte supprimé',
   //       detail: 'Votre compte et toutes vos données ont été définitivement supprimés.'
   //     });
-      
+
   //     setTimeout(() => {
   //       this.authService.logout();
   //       this.router.navigate(['/']);
   //     }, 2000);
   //   }, 1000);
   // }
-  
+
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
       control?.markAsTouched();
     });
   }
-  
+
   goBack() {
     this.router.navigate(['/dashboard']);
   }
-  
+
   // Helper methods for form validation
   get currentPassword() { return this.passwordForm.get('currentPassword'); }
   get newPassword() { return this.passwordForm.get('newPassword'); }

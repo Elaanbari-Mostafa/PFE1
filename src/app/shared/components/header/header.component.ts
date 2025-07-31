@@ -30,6 +30,7 @@ export class HeaderComponent {
   isScrolled = false;
   mobileMenuOpen = false;
 
+
   constructor(
     protected router: Router,
     public authService: AuthService

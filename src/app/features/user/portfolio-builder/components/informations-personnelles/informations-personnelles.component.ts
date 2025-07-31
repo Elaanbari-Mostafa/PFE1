@@ -53,7 +53,7 @@ export class InformationsPersonnellesComponent implements OnInit {
       pays: ['Maroc', Validators.required],
       ville: ['Casablanca', Validators.required],
       languages: [["Français", "Anglais", "Arabe"]],
-      cvPath: [''],
+      cvPath: [],
       photoProfilPrimaryPath: [''],
       photoProfilSecondairePath: [''],
       projetsTermines: [8, [Validators.min(0)]],

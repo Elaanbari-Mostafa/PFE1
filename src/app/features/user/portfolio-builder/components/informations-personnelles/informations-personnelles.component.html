@@ -136,7 +136,7 @@
 
     <div class="form-group">
       <label>CV</label>
-      <p-fileUpload mode="basic" formControlName="cvPath" name="CV" accept="application/pdf" [maxFileSize]="10000000"
+      <p-fileUpload mode="basic"  name="CV" accept="application/pdf" [maxFileSize]="10000000"
         chooseLabel="Choisir votre cv" (onSelect)="onCVSelect($event)"></p-fileUpload>
       <small class="p-help">Format accepté: PDF </small>
     </div>

@@ -9,87 +9,21 @@
         </div>
       </div>
     </div>
-
     <div class="profile-content">
-      <p-tabView [(activeIndex)]="activeIndex">
+      <p-tabs value="0" >
+        <p-tablist>
+          <p-tab value="0">Sécurité</p-tab>
+          <p-tab value="1">Gestion du Compte</p-tab>
+        </p-tablist>
 
-        <!-- Onglet Informations Personnelles -->
-        <!-- <p-tabPanel header="Informations Personnelles" leftIcon="pi pi-user">
-          <p-card header="Informations du compte">
-            <form [formGroup]="profileForm" (ngSubmit)="onUpdateProfile()">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="prenom">Prénom *</label>
-                  <input pInputText id="prenom" formControlName="prenom" />
-                  <small *ngIf="profileForm.get('prenom')?.invalid && profileForm.get('prenom')?.touched"
-                    class="p-error">
-                    Le prénom est requis
-                  </small>
-                </div>
-
-                <div class="form-group">
-                  <label for="nom">Nom *</label>
-                  <input pInputText id="nom" formControlName="nom" />
-                  <small *ngIf="profileForm.get('nom')?.invalid && profileForm.get('nom')?.touched" class="p-error">
-                    Le nom est requis
-                  </small>
-                </div>
-
-                <div class="form-group">
-                  <label for="email">Email *</label>
-                  <input pInputText id="email" formControlName="email" />
-                  <small *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="p-error">
-                    Email valide requis
-                  </small>
-                </div>
-
-                <div class="form-group">
-                  <label for="nomUtilisateur">Nom d'utilisateur *</label>
-                  <input pInputText id="nomUtilisateur" formControlName="nomUtilisateur" />
-                  <small
-                    *ngIf="profileForm.get('nomUtilisateur')?.invalid && profileForm.get('nomUtilisateur')?.touched"
-                    class="p-error">
-                    Le nom d'utilisateur est requis
-                  </small>
-                </div>
-
-                <div class="form-group full-width">
-                  <label for="titreProf">Titre professionnel *</label>
-                  <input pInputText id="titreProf" formControlName="titreProf" />
-                  <small *ngIf="profileForm.get('titreProf')?.invalid && profileForm.get('titreProf')?.touched"
-                    class="p-error">
-                    Le titre professionnel est requis
-                  </small>
-                </div>
-
-                <div class="form-group full-width">
-                  <label for="adresse">Adresse *</label>
-                  <input pInputText id="adresse" formControlName="adresse" />
-                  <small *ngIf="profileForm.get('adresse')?.invalid && profileForm.get('adresse')?.touched"
-                    class="p-error">
-                    L'adresse est requise
-                  </small>
-                </div>
-              </div>
-
-              <div class="form-actions">
-                <button pButton type="submit" label="Mettre à jour le profil" icon="pi pi-save" class="p-button-raised"
-                  [loading]="loading" [disabled]="profileForm.invalid">
-                </button>
-              </div>
-            </form>
-          </p-card>
-        </p-tabPanel> -->
-
-        <!-- Onglet Sécurité -->
-        <p-tabPanel header="Sécurité" leftIcon="pi pi-shield">
+        <p-tabpanel value="0">
           <p-card header="Changer le mot de passe">
-            <!-- <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
+            <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
               <div class="form-grid">
-                <div class="form-group full-width">
+                <div class="form-group">
                   <label for="currentPassword">Mot de passe actuel *</label>
                   <p-password id="currentPassword" formControlName="currentPassword"
-                    placeholder="Votre mot de passe actuel" [feedback]="false" [toggleMask]="true" styleClass="w-full">
+                    placeholder="Votre mot de passe actuel" [feedback]="false" [toggleMask]="true" styleClass="">
                   </p-password>
                   <small *ngIf="currentPassword?.invalid && currentPassword?.touched" class="p-error">
                     Le mot de passe actuel est requis
@@ -99,7 +33,7 @@
                 <div class="form-group">
                   <label for="newPassword">Nouveau mot de passe *</label>
                   <p-password id="newPassword" formControlName="newPassword" placeholder="Nouveau mot de passe"
-                    [feedback]="true" [toggleMask]="true" styleClass="w-full">
+                    [feedback]="true" [toggleMask]="true" styleClass="">
                   </p-password>
                   <small *ngIf="newPassword?.invalid && newPassword?.touched" class="p-error">
                     <span *ngIf="newPassword?.errors?.['required']">Le nouveau mot de passe est requis</span>
@@ -112,7 +46,7 @@
                   <label for="confirmPassword">Confirmer le nouveau mot de passe *</label>
                   <p-password id="confirmPassword" formControlName="confirmPassword"
                     placeholder="Confirmez le nouveau mot de passe" [feedback]="false" [toggleMask]="true"
-                    styleClass="w-full">
+                    styleClass="">
                   </p-password>
                   <small *ngIf="confirmPassword?.invalid && confirmPassword?.touched" class="p-error">
                     <span *ngIf="confirmPassword?.errors?.['required']">La confirmation est requise</span>
@@ -127,135 +61,99 @@
                   [loading]="loading" [disabled]="passwordForm.invalid">
                 </button>
               </div>
-            </form> -->
+            </form>
+          </p-card>
+        </p-tabpanel>
+        <p-tabpanel value="1">
+         <p-card header="Zone de danger" styleClass="danger-zone">
+
+            <div class="danger-content">
+              <div class="danger-info">
+                <h4>Désactiver le compte</h4>
+                <p>
+                  Une fois que vous désactivez votre compte, il n'y a pas de retour en arrière.
+                </p>
+              </div>
+              <button pButton label="Désactiver le compte" icon="pi pi-trash" class="p-button-danger p-button-outlined"
+                (click)="onDeactivateAccount()">
+              </button>
+            </div>
+          </p-card>
+        </p-tabpanel>
+      </p-tabs>
+    </div>
+
+    <div class="profile-content">
+      <!-- <p-tabView [(activeIndex)]="activeIndex">
+        
+        <p-tabPanel header="Sécurité" leftIcon="pi pi-shield">
+          <p-card header="Changer le mot de passe">
             <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="currentPassword">Mot de passe actuel *</label>
-              <p-password 
-                id="currentPassword" 
-                formControlName="currentPassword" 
-                placeholder="Votre mot de passe actuel"
-                [feedback]="false"
-                [toggleMask]="true"
-                styleClass="">
-              </p-password>
-              <small *ngIf="currentPassword?.invalid && currentPassword?.touched" class="p-error">
-                Le mot de passe actuel est requis
-              </small>
-            </div>
-            
-            <div class="form-group">
-              <label for="newPassword">Nouveau mot de passe *</label>
-              <p-password 
-                id="newPassword" 
-                formControlName="newPassword" 
-                placeholder="Nouveau mot de passe"
-                [feedback]="true"
-                [toggleMask]="true"
-                styleClass="">
-              </p-password>
-              <small *ngIf="newPassword?.invalid && newPassword?.touched" class="p-error">
-                <span *ngIf="newPassword?.errors?.['required']">Le nouveau mot de passe est requis</span>
-                <span *ngIf="newPassword?.errors?.['minlength']">Le mot de passe doit contenir au moins 6 caractères</span>
-              </small>
-            </div>
-            
-            <div class="form-group">
-              <label for="confirmPassword">Confirmer le nouveau mot de passe *</label>
-              <p-password 
-                id="confirmPassword" 
-                formControlName="confirmPassword" 
-                placeholder="Confirmez le nouveau mot de passe"
-                [feedback]="false"
-                [toggleMask]="true"
-                styleClass="">
-              </p-password>
-              <small *ngIf="confirmPassword?.invalid && confirmPassword?.touched" class="p-error">
-                <span *ngIf="confirmPassword?.errors?.['required']">La confirmation est requise</span>
-                <span *ngIf="confirmPassword?.errors?.['passwordMismatch']">Les mots de passe ne correspondent pas</span>
-              </small>
-            </div>
-          </div>
-          
-          <div class="form-actions">
-            <button pButton type="submit" label="Modifier le mot de passe" 
-                   icon="pi pi-save" class="p-button-raised"
-                   [loading]="loading" [disabled]="passwordForm.invalid">
-            </button>
-          </div>
-        </form>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="currentPassword">Mot de passe actuel *</label>
+                  <p-password id="currentPassword" formControlName="currentPassword"
+                    placeholder="Votre mot de passe actuel" [feedback]="false" [toggleMask]="true" styleClass="">
+                  </p-password>
+                  <small *ngIf="currentPassword?.invalid && currentPassword?.touched" class="p-error">
+                    Le mot de passe actuel est requis
+                  </small>
+                </div>
+
+                <div class="form-group">
+                  <label for="newPassword">Nouveau mot de passe *</label>
+                  <p-password id="newPassword" formControlName="newPassword" placeholder="Nouveau mot de passe"
+                    [feedback]="true" [toggleMask]="true" styleClass="">
+                  </p-password>
+                  <small *ngIf="newPassword?.invalid && newPassword?.touched" class="p-error">
+                    <span *ngIf="newPassword?.errors?.['required']">Le nouveau mot de passe est requis</span>
+                    <span *ngIf="newPassword?.errors?.['minlength']">Le mot de passe doit contenir au moins 6
+                      caractères</span>
+                  </small>
+                </div>
+
+                <div class="form-group">
+                  <label for="confirmPassword">Confirmer le nouveau mot de passe *</label>
+                  <p-password id="confirmPassword" formControlName="confirmPassword"
+                    placeholder="Confirmez le nouveau mot de passe" [feedback]="false" [toggleMask]="true"
+                    styleClass="">
+                  </p-password>
+                  <small *ngIf="confirmPassword?.invalid && confirmPassword?.touched" class="p-error">
+                    <span *ngIf="confirmPassword?.errors?.['required']">La confirmation est requise</span>
+                    <span *ngIf="confirmPassword?.errors?.['passwordMismatch']">Les mots de passe ne correspondent
+                      pas</span>
+                  </small>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button pButton type="submit" label="Modifier le mot de passe" icon="pi pi-save" class="p-button-raised"
+                  [loading]="loading" [disabled]="passwordForm.invalid">
+                </button>
+              </div>
+            </form>
           </p-card>
         </p-tabPanel>
 
-        <!-- Onglet Gestion du Compte -->
+        
         <p-tabPanel header="Gestion du Compte" leftIcon="pi pi-cog">
-          <!-- <div class="account-management">
-
-            
-            <p-card header="Désactivation temporaire" styleClass="warning-zone mb-4">
-              <div class="action-content">
-                <div class="action-info">
-                  <h4>Désactiver temporairement le compte</h4>
-                  <p>
-                    Votre compte sera suspendu pendant 30 jours. Vous pourrez le réactiver
-                    en vous reconnectant dans ce délai. Votre abonnement sera également suspendu.
-                  </p>
-                  <ul class="consequences-list">
-                    <li>• Portfolio non accessible publiquement</li>
-                    <li>• Abonnement suspendu (temps non décompté)</li>
-                    <li>• Données conservées pendant 30 jours</li>
-                    <li>• Réactivation possible en se reconnectant</li>
-                  </ul>
-                </div>
-                <button pButton label="Désactiver temporairement" icon="pi pi-pause"
-                  class="p-button-warning p-button-outlined" (click)="onDeactivateAccount()">
-                </button>
-              </div>
-            </p-card>
-
-            
-            <p-card header="Suppression définitive" styleClass="danger-zone">
-              <div class="action-content">
-                <div class="action-info">
-                  <h4>Supprimer définitivement le compte</h4>
-                  <p>
-                    <strong>⚠️ ATTENTION : Cette action est irréversible !</strong><br>
-                    Toutes vos données seront définitivement supprimées sans possibilité de récupération.
-                  </p>
-                  <ul class="consequences-list">
-                    <li>• Portfolio définitivement supprimé</li>
-                    <li>• Tous les projets et données perdus</li>
-                    <li>• Abonnement annulé sans remboursement</li>
-                    <li>• Aucune possibilité de récupération</li>
-                  </ul>
-                </div>
-                <button pButton label="Supprimer définitivement" icon="pi pi-trash"
-                  class="p-button-danger p-button-outlined" (click)="onDeleteAccount()">
-                </button>
-              </div>
-            </p-card>
-          </div> -->
           <p-card header="Zone de danger" styleClass="danger-zone">
-       
-          <div class="danger-content">
-          <div class="danger-info">
-            <h4>Désactiver le compte</h4>
-            <p>
-              Une fois que vous désactivez votre compte, il n'y a pas de retour en arrière. 
-              <!-- Toutes vos données seront définitivement supprimées. -->
-            </p>
-          </div>
-          <button pButton label="Désactiver le compte" 
-                 icon="pi pi-trash" 
-                 class="p-button-danger p-button-outlined"
-                 (click)="onDeactivateAccount()">
-          </button>
-        </div>
-        </p-card> 
+
+            <div class="danger-content">
+              <div class="danger-info">
+                <h4>Désactiver le compte</h4>
+                <p>
+                  Une fois que vous désactivez votre compte, il n'y a pas de retour en arrière.
+                </p>
+              </div>
+              <button pButton label="Désactiver le compte" icon="pi pi-trash" class="p-button-danger p-button-outlined"
+                (click)="onDeactivateAccount()">
+              </button>
+            </div>
+          </p-card>
         </p-tabPanel>
 
-      </p-tabView>
+      </p-tabView> -->
     </div>
   </div>
 </div>
