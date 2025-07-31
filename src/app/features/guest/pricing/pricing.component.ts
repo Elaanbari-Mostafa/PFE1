@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ChipModule } from 'primeng/chip';
-import { PaymentService } from '../../core/services/payment.service';
+import { PaymentService } from '../../../core/services/payment.service';
 
 interface PricingPlan {
   name: string;
@@ -31,23 +31,23 @@ interface PricingPlan {
   styleUrls: ['./pricing.component.css']
 })
 export class PricingComponent implements OnInit, AfterViewInit {
-  
+
   constructor(
     private router: Router,
     private paymentService: PaymentService
-  ) {}
-  
+  ) { }
+
   ngOnInit() {
     this.setupScrollAnimation();
   }
-  
+
   setupScrollAnimation() {
     const observerOptions = {
       root: null,
       rootMargin: '0px',
       threshold: 0.1
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -56,7 +56,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
         }
       });
     }, observerOptions);
-    
+
     setTimeout(() => {
       const elements = document.querySelectorAll('.animate-on-scroll');
       elements.forEach(element => {
@@ -64,12 +64,12 @@ export class PricingComponent implements OnInit, AfterViewInit {
       });
     }, 100);
   }
-  
+
   ngAfterViewInit() {
     // Initialiser PayPal après le rendu de la vue
     //this.initializePayPalButtons();
   }
-  
+
   plans: PricingPlan[] = [
     {
       name: 'Essai Gratuit',
@@ -132,11 +132,11 @@ export class PricingComponent implements OnInit, AfterViewInit {
       buttonClass: 'p-button-outlined'
     }
   ];
-  
+
   async initializePayPalButtons() {
     try {
       await this.paymentService.initializePayPal();
-      
+
       // Créer les boutons PayPal pour les plans payants
       this.plans.forEach((plan, index) => {
         if (plan.price > 0) {
@@ -146,7 +146,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
               containerId,
               plan.price.toString(),
               plan.name
-            ).catch(error => {
+            ).catch((error: unknown) => {
               console.error(`Erreur lors de la création du bouton PayPal pour ${plan.name}:`, error);
             });
           }, 100);
@@ -156,11 +156,11 @@ export class PricingComponent implements OnInit, AfterViewInit {
       console.error('Erreur lors de l\'initialisation de PayPal:', error);
     }
   }
-  
+
   selectPlan(plan: PricingPlan) {
     // Rediriger vers l'inscription avec le plan sélectionné
-    this.router.navigate(['/auth/register'], { 
-      queryParams: { selectedPlan: plan.name.toLowerCase().replace(' ', '-') } 
+    this.router.navigate(['/auth/register'], {
+      queryParams: { selectedPlan: plan.name.toLowerCase().replace(' ', '-') }
     });
   }
 }

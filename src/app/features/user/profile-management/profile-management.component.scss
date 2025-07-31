@@ -25,13 +25,36 @@
 }
 
 .profile-content {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
+}
+
+.account-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-item label {
+  font-weight: 600;
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+}
+
+.info-item span {
+  color: var(--text-color);
+  font-size: 1rem;
 }
 
 .form-grid {
   // display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -40,12 +63,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1rem;
   width: 50%;
-}
-
-.form-group.full-width {
-  grid-column: span 2;
 }
 
 .form-group label {
@@ -58,30 +76,6 @@
   justify-content: flex-end;
 }
 
-.account-management {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.warning-zone {
-  border: 2px solid var(--orange-200);
-}
-
-.warning-zone :deep(.p-card-header) {
-  background-color: var(--orange-50);
-  color: var(--orange-800);
-  border-bottom: 1px solid var(--orange-200);
-}
-
-.danger-content {
-  display: ruby;
-}
-
-.p-button-danger {
-  margin-left: 1rem;
-}
-
 .danger-zone {
   border: 2px solid var(--red-200);
 }
@@ -92,70 +86,22 @@
   border-bottom: 1px solid var(--red-200);
 }
 
-::ng-deep {
-  .danger-zone .p-card-title {
-    color: #df4141;
-  }
-}
-
-.action-content {
+.danger-content {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 2rem;
 }
 
-.action-info {
-  flex: 1;
-}
-
-.action-info h4 {
+.danger-info h4 {
   margin: 0 0 0.5rem 0;
-  color: inherit;
+  color: var(--red-800);
 }
 
-.action-info p {
-  margin: 0 0 1rem 0;
-  line-height: 1.5;
-}
-
-.consequences-list {
+.danger-info p {
   margin: 0;
-  padding-left: 0;
-  list-style: none;
-  color: var(--text-color-secondary);
-}
-
-.consequences-list li {
-  margin-bottom: 0.25rem;
-  font-size: 0.9rem;
-}
-
-::ng-deep {
-  .p-tabview {
-    .p-tabview-nav {
-      background: white;
-      border-radius: 8px 8px 0 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .p-tabview-panels {
-      background: transparent;
-      padding: 0;
-    }
-
-    .p-tabview-panel {
-      padding: 2rem 0;
-    }
-  }
-
-  .p-password {
-    width: 100%;
-
-    .p-password-input {
-      width: 100%;
-    }
-  }
+  color: var(--red-600);
+  line-height: 1.5;
 }
 
 @media (max-width: 768px) {
@@ -169,16 +115,25 @@
     text-align: center;
   }
 
-  .form-grid {
+  .account-info {
     grid-template-columns: 1fr;
   }
 
-  .form-group.full-width {
-    grid-column: span 1;
-  }
-
-  .action-content {
+  .danger-content {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+
+::ng-deep {
+
+  .p-password {
+    width: 100%;
+    margin-bottom: 10px;
+
+    .p-password-input {
+      width: 100%;
+    }
   }
 }

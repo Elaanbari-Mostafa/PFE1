@@ -9,11 +9,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
-import { TabViewModule } from 'primeng/tabview';
 import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../../../core/models/user.model';
-import { TabsModule } from 'primeng/tabs';
-import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile-management',
@@ -23,23 +20,19 @@ import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
     ReactiveFormsModule,
     ButtonModule,
     CardModule,
-    TabsModule,
     InputTextModule,
     PasswordModule,
     ConfirmDialogModule,
-    DividerModule,
-    // TabViewModule
+    DividerModule
   ],
   templateUrl: './profile-management.component.html',
   styleUrls: ['./profile-management.component.scss']
 })
 export class ProfileManagementComponent implements OnInit {
   passwordForm: FormGroup;
-  profileForm: FormGroup;
   currentUser: User | null = null;
   loading = false;
-  // activeIndex = 0;
-
+  
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -52,69 +45,29 @@ export class ProfileManagementComponent implements OnInit {
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     }, { validators: this.passwordMatchValidator });
-
-    this.profileForm = this.fb.group({
-      nom: ['', [Validators.required]],
-      prenom: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      nomUtilisateur: ['', [Validators.required]],
-      titreProf: ['', [Validators.required]],
-      adresse: ['', [Validators.required]]
-    });
   }
-
-
-
-
-
-
+  
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
-    if (this.currentUser) {
-      this.profileForm.patchValue({
-        nom: this.currentUser.nom,
-        prenom: this.currentUser.prenom,
-        email: this.currentUser.email,
-        nomUtilisateur: this.currentUser.nomUtilisateur,
-        titreProf: this.currentUser.titreProf,
-        adresse: this.currentUser.adresse
-      });
-    }
   }
-
+  
   passwordMatchValidator(form: FormGroup) {
     const newPassword = form.get('newPassword');
     const confirmPassword = form.get('confirmPassword');
-
+    
     if (newPassword && confirmPassword && newPassword.value !== confirmPassword.value) {
       confirmPassword.setErrors({ passwordMismatch: true });
       return { passwordMismatch: true };
     }
-
+    
     return null;
   }
-
-  onUpdateProfile() {
-    if (this.profileForm.valid) {
-      this.loading = true;
-
-      setTimeout(() => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Profil mis à jour',
-          detail: 'Vos informations ont été mises à jour avec succès'
-        });
-        this.loading = false;
-      }, 1000);
-    } else {
-      this.markFormGroupTouched(this.profileForm);
-    }
-  }
-
+  
   onChangePassword() {
     if (this.passwordForm.valid) {
       this.loading = true;
-
+      
+      // Simulation de changement de mot de passe
       setTimeout(() => {
         this.messageService.add({
           severity: 'success',
@@ -125,10 +78,10 @@ export class ProfileManagementComponent implements OnInit {
         this.loading = false;
       }, 1000);
     } else {
-      this.markFormGroupTouched(this.passwordForm);
+      this.markFormGroupTouched();
     }
   }
-
+  
   onDeactivateAccount() {
     this.confirmationService.confirm({
       message: 'Êtes-vous sûr de vouloir désactiver votre compte ? Cette action est irréversible.',
@@ -142,24 +95,10 @@ export class ProfileManagementComponent implements OnInit {
       }
     });
   }
-
-  // onDeleteAccount() {
-  //   this.confirmationService.confirm({
-  //     message: 'ATTENTION : Cette action est irréversible ! Toutes vos données (portfolio, projets, abonnement) seront définitivement supprimées. Êtes-vous absolument sûr ?',
-  //     header: 'Supprimer définitivement le compte',
-  //     icon: 'pi pi-exclamation-triangle',
-  //     acceptLabel: 'Oui, supprimer définitivement',
-  //     rejectLabel: 'Annuler',
-  //     acceptButtonStyleClass: 'p-button-danger',
-  //     accept: () => {
-  //       this.deleteAccount();
-  //     }
-  //   });
-  // }
-
+  
   private deactivateAccount() {
     this.loading = true;
-
+    
     // Simulation de désactivation de compte
     setTimeout(() => {
       this.messageService.add({
@@ -167,7 +106,7 @@ export class ProfileManagementComponent implements OnInit {
         summary: 'Compte désactivé',
         detail: 'Votre compte a été désactivé avec succès'
       });
-
+      
       // Déconnexion et redirection
       setTimeout(() => {
         this.authService.logout();
@@ -175,35 +114,18 @@ export class ProfileManagementComponent implements OnInit {
       }, 2000);
     }, 1000);
   }
-
-  // private deleteAccount() {
-  //   this.loading = true;
-
-  //   setTimeout(() => {
-  //     this.messageService.add({
-  //       severity: 'success',
-  //       summary: 'Compte supprimé',
-  //       detail: 'Votre compte et toutes vos données ont été définitivement supprimés.'
-  //     });
-
-  //     setTimeout(() => {
-  //       this.authService.logout();
-  //       this.router.navigate(['/']);
-  //     }, 2000);
-  //   }, 1000);
-  // }
-
-  private markFormGroupTouched(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(key => {
-      const control = formGroup.get(key);
+  
+  private markFormGroupTouched() {
+    Object.keys(this.passwordForm.controls).forEach(key => {
+      const control = this.passwordForm.get(key);
       control?.markAsTouched();
     });
   }
-
+  
   goBack() {
     this.router.navigate(['/dashboard']);
   }
-
+  
   // Helper methods for form validation
   get currentPassword() { return this.passwordForm.get('currentPassword'); }
   get newPassword() { return this.passwordForm.get('newPassword'); }
